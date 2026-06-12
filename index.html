@@ -668,7 +668,7 @@
                 const currentApiKey = getApiKey();
                 if (!currentApiKey) throw new Error("API Key belum disetting. Masukkan API Key di tab 'Admin & Log API'.");
 
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${currentApiKey}`;
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
                 
                 const prompt = `Analisis gambar ini dengan sangat detail. Abaikan Etnis, Gaya/Warna Rambut, Kumis, dan Janggut. 
                 Gunakan frasa '(gambar referensi)' setelah menyebutkan subjek utama.`;
