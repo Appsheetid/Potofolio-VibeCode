@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AppSheet Indonesia — Professional AppSheet Development & Automation Solutions">
+  <title>AppSheet Indonesia — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-alt: #fafafa;
+      --color-text: #171717;
+      --color-text-muted: #525252;
+      --color-text-subtle: #a3a3a3;
+      --color-accent: #000000;
+      --color-accent-hover: #171717;
+      --color-border: #e5e5e5;
+      --color-border-hover: #d4d4d4;
+      --color-card-bg: #ffffff;
+      --color-badge-bg: #f5f5f5;
+      --color-badge-text: #171717;
+      --shadow-sm: rgba(0,0,0,0.04) 0px 1px 2px;
+      --shadow-md: rgba(0,0,0,0.06) 0px 4px 8px -2px, rgba(0,0,0,0.03) 0px 2px 4px -2px;
+      --shadow-lg: rgba(0,0,0,0.08) 0px 12px 24px -8px, rgba(0,0,0,0.04) 0px 8px 16px -8px;
+      --shadow-xl: rgba(0,0,0,0.1) 0px 20px 40px -12px, rgba(0,0,0,0.05) 0px 12px 24px -12px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-pill: 9999px;
+      --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+      --container-max: 1200px;
+      --header-height: 72px;
+      --transition-fast: 120ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0a0a0a;
+        --color-bg-alt: #111111;
+        --color-text: #fafafa;
+        --color-text-muted: #a3a3a3;
+        --color-text-subtle: #737373;
+        --color-accent: #ffffff;
+        --color-accent-hover: #e5e5e5;
+        --color-border: #262626;
+        --color-border-hover: #404040;
+        --color-card-bg: #111111;
+        --color-badge-bg: #1a1a1a;
+        --color-badge-text: #fafafa;
+        --shadow-sm: rgba(0,0,0,0.3) 0px 1px 2px;
+        --shadow-md: rgba(0,0,0,0.4) 0px 4px 8px -2px, rgba(0,0,0,0.2) 0px 2px 4px -2px;
+        --shadow-lg: rgba(0,0,0,0.5) 0px 12px 24px -8px, rgba(0,0,0,0.25) 0px 8px 16px -8px;
+        --shadow-xl: rgba(0,0,0,0.6) 0px 20px 40px -12px, rgba(0,0,0,0.3) 0px 12px 24px -12px;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    h1, h2, h3, h4 { font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
+    h1 { font-size: clamp(36px, 5vw, 56px); }
+    h2 { font-size: clamp(28px, 4vw, 40px); }
+    h3 { font-size: clamp(20px, 2.5vw, 24px); }
+    h4 { font-size: clamp(16px, 2vw, 18px); }
+    p { color: var(--color-text-muted); font-size: 16px; line-height: 1.7; }
+    .text-sm { font-size: 14px; }
+    .text-xs { font-size: 12px; }
+    .text-lg { font-size: 18px; }
+    .font-mono { font-family: var(--font-mono); }
+    .font-light { font-weight: 300; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+
+    a { color: inherit; text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--color-accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text-muted);
+      border-color: transparent;
+      padding: var(--space-2) var(--space-3);
+    }
+    .btn-ghost:hover { color: var(--color-text); background: var(--color-bg-alt); }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
+    .section { padding: var(--space-20) 0; }
+    .section-sm { padding: var(--space-12) 0; }
+
+    .grid { display: grid; gap: var(--space-6); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 1024px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-2 { gap: var(--space-2); }
+    .gap-3 { gap: var(--space-3); }
+    .gap-4 { gap: var(--space-4); }
+    .gap-6 { gap: var(--space-6); }
+    .gap-8 { gap: var(--space-8); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      background: rgba(var(--color-bg-rgb, 255,255,255), 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    @media (prefers-color-scheme: dark) {
+      header { background: rgba(var(--color-bg-rgb, 10,10,10), 0.85); }
+    }
+    .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: var(--space-2); font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+    .logo-mark { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--color-accent); display: flex; align-items: center; justify-content: center; color: var(--color-bg); font-weight: 700; font-size: 14px; }
+    .nav { display: flex; align-items: center; gap: var(--space-6); }
+    .nav-link { font-size: 14px; font-weight: 500; color: var(--color-text-muted); padding: var(--space-2) 0; position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-accent); transition: width var(--transition-base); }
+    .nav-link:hover { color: var(--color-text); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--color-text); }
+    .nav-link.active::after { width: 100%; }
+    .mobile-menu-btn { display: none; padding: var(--space-2); }
+
+    @media (max-width: 768px) {
+      .nav { position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border); flex-direction: column; padding: var(--space-6); gap: var(--space-4); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all var(--transition-base); }
+      .nav.open { transform: translateY(0); opacity: 1; visibility: visible; }
+      .mobile-menu-btn { display: flex; }
+    }
+
+    .hero { padding: var(--space-24) 0 var(--space-20); }
+    .hero-content { max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; margin-bottom: var(--space-6); }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { margin-bottom: var(--space-6); }
+    .hero p { font-size: clamp(18px, 2.5vw, 22px); color: var(--color-text-muted); margin-bottom: var(--space-8); max-width: 600px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+    .stats-bar { padding: var(--space-10) 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-20); }
+    .stat { text-align: center; padding: 0 var(--space-4); }
+    .stat-value { font-size: clamp(32px, 5vw, 48px); font-weight: 600; letter-spacing: -0.03em; color: var(--color-text); line-height: 1.1; }
+    .stat-label { font-size: 14px; color: var(--color-text-muted); margin-top: var(--space-2); font-weight: 500; }
+
+    .section-header { margin-bottom: var(--space-12); }
+    .section-tag { display: inline-block; font-size: 13px; font-weight: 500; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3); }
+    .section-header h2 { margin-bottom: var(--space-3); }
+    .section-header p { max-width: 600px; }
+
+    .card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .card-icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); margin-bottom: var(--space-4); transition: all var(--transition-fast); }
+    .card:hover .card-icon { background: var(--color-accent); color: var(--color-bg); }
+    .card h3 { margin-bottom: var(--space-2); }
+    .card p { flex: 1; margin-bottom: var(--space-4); }
+    .card-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
+    .tag { font-size: 12px; font-weight: 500; padding: var(--space-1) var(--space-3); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-family: var(--font-mono); }
+
+    .project-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+    .project-card:hover { border-color: var(--color-border-hover); box-shadow: var(--shadow-xl); transform: translateY(-4px); }
+    .project-image { aspect-ratio: 16/10; background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%); position: relative; overflow: hidden; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--transition-slow); }
+    .project-image.loaded img { opacity: 1; }
+    .project-content { padding: var(--space-6); }
+    .project-meta { display: flex; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
+    .project-title { font-size: 20px; font-weight: 600; margin-bottom: var(--space-2); }
+    .project-desc { color: var(--color-text-muted); margin-bottom: var(--space-4); line-height: 1.7; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+    .project-link { font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: var(--space-2); }
+    .project-link svg { transition: transform var(--transition-fast); }
+    .project-link:hover svg { transform: translateX(4px); }
+
+    .service-card { text-align: center; padding: var(--space-8); }
+    .service-icon { width: 64px; height: 64px; margin: 0 auto var(--space-5); border-radius: var(--radius-xl); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); transition: all var(--transition-base); }
+    .service-card:hover .service-icon { background: var(--color-accent); color: var(--color-bg); transform: scale(1.05); }
+    .service-card h3 { margin-bottom: var(--space-3); }
+    .service-card p { margin-bottom: var(--space-5); }
+    .service-features { display: flex; flex-direction: column; gap: var(--space-2); text-align: left; }
+    .service-feature { display: flex; align-items: center; gap: var(--space-2); font-size: 14px; color: var(--color-text-muted); }
+    .service-feature::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; }
+
+    .testimonial-card { text-align: left; }
+    .testimonial-stars { display: flex; gap: 2px; margin-bottom: var(--space-4); color: #fbbf24; }
+    .testimonial-text { font-size: 18px; line-height: 1.7; color: var(--color-text); margin-bottom: var(--space-6); font-weight: 400; }
+    .testimonial-author { display: flex; align-items: center; gap: var(--space-3); }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--color-border) 0%, var(--color-bg-alt) 100%); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-text-muted); font-size: 16px; }
+    .testimonial-name { font-weight: 600; }
+    .testimonial-role { font-size: 14px; color: var(--color-text-muted); }
+
+    .cta-section { background: var(--color-accent); color: var(--color-bg); padding: var(--space-20) 0; text-align: center; }
+    .cta-section h2 { color: inherit; margin-bottom: var(--space-4); }
+    .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto var(--space-8); }
+    .cta-section .btn-primary { background: var(--color-bg); color: var(--color-accent); }
+    .cta-section .btn-primary:hover { background: var(--color-bg-alt); }
+    .cta-section .btn-secondary { border-color: rgba(255,255,255,0.3); color: var(--color-bg); }
+    .cta-section .btn-secondary:hover { border-color: var(--color-bg); background: rgba(255,255,255,0.1); }
+
+    footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-16) 0 var(--space-8); }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-10); margin-bottom: var(--space-12); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand p { color: var(--color-text-muted); margin-top: var(--space-4); max-width: 300px; }
+    .footer-social { display: flex; gap: var(--space-3); margin-top: var(--space-6); }
+    .footer-social a { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-card-bg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); transition: all var(--transition-fast); }
+    .footer-social a:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-bg); }
+    .footer-title { font-weight: 600; margin-bottom: var(--space-4); font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-subtle); }
+    .footer-links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer-links a { font-size: 14px; color: var(--color-text-muted); transition: color var(--transition-fast); }
+    .footer-links a:hover { color: var(--color-accent); }
+    .footer-bottom { padding-top: var(--space-8); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); }
+    .footer-bottom p { font-size: 14px; color: var(--color-text-subtle); margin: 0; }
+
+    .fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 100ms; }
+    .delay-2 { animation-delay: 200ms; }
+    .delay-3 { animation-delay: 300ms; }
+    .delay-4 { animation-delay: 400ms; }
+    .delay-5 { animation-delay: 500ms; }
+    .delay-6 { animation-delay: 600ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+
+    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="AppSheet Indonesia Home">
+        <span class="logo-mark">AI</span>
+        AppSheet Indonesia
+      </a>
+      <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <a href="#projects" class="nav-link">Proyek</a>
+        <a href="#services" class="nav-link">Layanan</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#contact" class="btn btn-primary">Mulai Proyek</a>
+      </nav>
+      <button class="mobile-menu-btn btn btn-ghost" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge fade-up">Mitra Resmi Google Cloud & AppSheet</span>
+          <h1 id="hero-title" class="fade-up delay-1">Membangun Aplikasi Bisnis Tanpa Kode,<br>Dengan Kecepatan Enterprise</h1>
+          <p class="fade-up delay-2">AppSheet Indonesia membantu perusahaan mengotomatisasi proses, menggantikan spreadsheet yang rawan error, dan meluncurkan aplikasi custom dalam hitungan hari — bukan bulan.</p>
+          <div class="hero-actions fade-up delay-3">
+            <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
+            <a href="#projects" class="btn btn-secondary">Lihat Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar" aria-label="Statistik AppSheet Indonesia">
+      <div class="container">
+        <div class="flex justify-between gap-6">
+          <div class="stat fade-up">
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Aplikasi Dibangun</div>
+          </div>
+          <div class="stat fade-up delay-1">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Pengurangan Waktu Dev</div>
+          </div>
+          <div class="stat fade-up delay-2">
+            <div class="stat-value">40+</div>
+            <div class="stat-label">Klien Enterprise</div>
+          </div>
+          <div class="stat fade-up delay-3">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime Aplikasi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Portfolio Terpilih</span>
+          <h2 id="projects-title">Proyek-Proyek Nyata, Dampak Nyata</h2>
+          <p>Beberapa solusi yang kami bangun untuk klien dari berbagai industri — manufaktur, logistik, keuangan, hingga ritel.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <!-- Project 1 -->
+          <article class="project-card fade-up">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="object-fit: cover;">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="200" height="32" rx="4" fill="#d4d4d4"/>
+                <rect x="120" y="170" width="560" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="120" y="200" width="560" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="230" width="180" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="350" width="160" height="40" rx="8" fill="#171717"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Dashboard Manufaktur — Preview UI</text>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Google Sheets</span>
+                <span class="tag">BigQuery</span>
+              </div>
+              <h3 class="project-title">Sistem Manajemen Produksi Real-time</h3>
+              <p class="project-desc">Aplikasi lengkap untuk pabrik manufaktur: tracking work order, monitoring mesin OEE, manajemen inventory bahan baku, dan dashboard KPI real-time untuk manajemen.</p>
+              <div class="project-tags">
+                <span class="tag">Real-time Sync</span>
+                <span class="tag">Role-based Access</span>
+                <span class="tag">Offline Mode</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Manufaktur • 3 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card fade-up delay-1">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="120" height="120" rx="12" fill="#d4d4d4"/>
+                <rect x="260" y="140" width="200" height="24" rx="4" fill="#d4d4d4"/>
+                <rect x="260" y="180" width="300" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="260" y="210" width="300" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="260" width="440" height="120" rx="8" fill="#f5f5f5"/>
+                <rect x="140" y="280" width="100" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="140" y="310" width="200" height="12" rx="4" fill="#e5e5e5"/>
+                <rect x="140" y="335" width="150" height="12" rx="4" fill="#e5e5e5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Logistics Tracking — Mobile View</text>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Google Maps API</span>
+                <span class="tag">Apps Script</span>
+              </div>
+              <h3 class="project-title">Aplikasi Logistik & Tracking Kiriman</h3>
+              <p class="project-desc">Solusi end-to-end untuk ekspedisi: booking order, assign kurir, route optimization dengan Google Maps, proof of delivery (foto + tanda tangan), dan notifikasi WhatsApp otomatis.</p>
+              <div class="project-tags">
+                <span class="tag">GPS Tracking</span>
+                <span class="tag">WhatsApp API</span>
+                <span class="tag">PWA</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Logistik • 2 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card fade-up delay-2">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="560" height="40" rx="8" fill="#d4d4d4"/>
+                <rect x="120" y="180" width="180" height="180" rx="8" fill="#d4d4d4"/>
+                <rect x="320" y="180" width="360" height="80" rx="8" fill="#f5f5f5"/>
+                <rect x="340" y="200" width="160" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="340" y="230" width="200" height="12" rx="4" fill="#e5e5e5"/>
+                <rect x="320" y="280" width="360" height="180" rx="8" fill="#f5f5f5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">HR & Finance Dashboard — Preview</text>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Looker Studio</span>
+                <span class="tag">Cloud SQL</span>
+              </div>
+              <h3 class="project-title">HRIS & Payroll Automation</h3>
+              <p class="project-desc">Sistem HR terintegrasi: absensi geofence, cuti/izin workflow approval, perhitungan payroll otomatis (BPJS, PPh21, THR), slip gaji digital, dan integrasi accounting.</p>
+              <div class="project-tags">
+                <span class="tag">Workflow Approval</span>
+                <span class="tag">Geofence</span>
+                <span class="tag">Email Automation</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Jasa & HR • 4 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card fade-up delay-3">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="560" height="240" rx="8" fill="#f5f5f5"/>
+                <rect x="140" y="140" width="80" height="80" rx="8" fill="#d4d4d4"/>
+                <rect x="240" y="150" width="200" height="20" rx="4" fill="#d4d4d4"/>
+                <rect x="240" y="180" width="300" height="14" rx="4" fill="#e5e5e5"/>
+                <rect x="240" y="205" width="180" height="14" rx="4" fill="#e5e5e5"/>
+                <rect x="140" y="250" width="200" height="40" rx="8" fill="#171717"/>
+                <rect x="360" y="250" width="200" height="40" rx="8" fill="#e5e5e5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Retail Inventory POS — Mobile UI</text>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Barcode Scanner</span>
+                <span class="tag">Firebase</span>
+              </div>
+              <h3 class="project-title">Inventory & POS untuk Ritel Multi-cabang</h3>
+              <p class="project-desc">Aplikasi kasir mobile + manajemen stok terpusat: barcode scanning, transfer antar cabang, auto reorder point, laporan penjualan harian/bulanan, integrasi e-commerce.</p>
+              <div class="project-tags">
+                <span class="tag">Multi-location</span>
+                <span class="tag">Barcode/QR</span>
+                <span class="tag">Offline-first</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Ritel • 3 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--space-10);">
+          <a href="#" class="btn btn-secondary">Lihat Semua Proyek →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section" style="background: var(--color-bg-alt);" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layanan Kami</span>
+          <h2 id="services-title">Dari Ide Hingga Aplikasi Berjalan</h2>
+          <p>Kami mendampingi tim Anda di setiap tahap — discovery, arsitektur data, development, deployment, hingga knowledge transfer.</p>
+        </div>
+
+        <div class="grid grid-4">
+          <article class="card service-card fade-up">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            </div>
+            <h3>Discovery & Arsitektur Data</h3>
+            <p>Analisis proses bisnis, pemodelan data Google Sheets/BigQuery, desain role & security, estimasi timeline & biaya.</p>
+            <div class="service-features">
+              <span class="service-feature">Process Mapping</span>
+              <span class="service-feature">Data Modeling</span>
+              <span class="service-feature">Security Design</span>
+              <span class="service-feature">Feasibility Study</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-1">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
+            </div>
+            <h3>Development AppSheet Custom</h3>
+            <p>Pembangunan aplikasi: UI/UX mobile & desktop, workflow automation, integrasi API eksternal, barcode/QR, geofence, offline mode.</p>
+            <div class="service-features">
+              <span class="service-feature">Custom UI/UX</span>
+              <span class="service-feature">Automation Bot</span>
+              <span class="service-feature">API Integration</span>
+              <span class="service-feature">Offline-first</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-2">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h3>Migrasi & Modernisasi</h3>
+            <p>Migrasi dari Access, Excel, FileMaker, VB6, legacy web ke AppSheet. Normalisasi data, clean up, dan parallel run hingga go-live.</p>
+            <div class="service-features">
+              <span class="service-feature">Data Migration</span>
+              <span class="service-feature">Legacy Cleanup</span>
+              <span class="service-feature">Parallel Run</span>
+              <span class="service-feature">Go-live Support</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-3">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>Pelatihan & Knowledge Transfer</h3>
+            <p>Workshop hands-on untuk tim internal: AppSheet Editor, expression formulas, automation, best practice, serta dokumentasi lengkap (SOP & video).</p>
+            <div class="service-features">
+              <span class="service-feature">Hands-on Workshop</span>
+              <span class="service-feature">SOP Documentation</span>
+              <span class="service-feature">Video Tutorial</span>
+              <span class="service-feature">Ongoing Support</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section-sm" aria-labelledby="tech-title">
+      <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto var(--space-10);">
+          <span class="section-tag">Teknologi</span>
+          <h2 id="tech-title">Stack Modern, Enterprise-ready</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="tag" style="background: #4285F4; color: white;">Google AppSheet</span>
+          <span class="tag" style="background: #34A853; color: white;">Google Sheets</span>
+          <span class="tag" style="background: #EA4335; color: white;">BigQuery</span>
+          <span class="tag" style="background: #FBBC05; color: #171717;">Apps Script</span>
+          <span class="tag" style="background: #4285F4; color: white;">Looker Studio</span>
+          <span class="tag" style="background: #25D366; color: white;">WhatsApp API</span>
+          <span class="tag" style="background: #000000; color: white;">Google Maps</span>
+          <span class="tag" style="background: #FF6B6B; color: white;">Firebase</span>
+          <span class="tag" style="background: #6366F1; color: white;">Cloud Run</span>
+          <span class="tag" style="background: #14AE5C; color: white;">Cloud SQL</span>
+          <span class="tag" style="background: #F59E0B; color: white;">Vertex AI</span>
+          <span class="tag" style="background: #EC4899; color: white;">Looker</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Testimoni Klien</span>
+          <h2 id="testimonials-title">Apa Kata Klien Kami</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card testimonial-card fade-up">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"AppSheet Indonesia mengerti bisnis kami, bukan cuma teknis. Dari spreadsheet kacau jadi aplikasi produksi real-time dalam 8 minggu. Tim produksi sekarang bisa fokus kerja, bukan ngurus file."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">BS</div>
+              <div>
+                <div class="testimonial-name">Budi Santoso</div>
+                <div class="testimonial-role">VP Operations, PT Maju Jaya Manufacturing</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial-card fade-up delay-1">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"Kurir kami dulu catat manual di kertas. Sekarang scan barcode, foto bukti kirim, otomatis masuk sistem + notif WA ke customer. Error delivery turun 90%."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RW</div>
+              <div>
+                <div class="testimonial-name">Rudi Wijaya</div>
+                <div class="testimonial-role">COO, JNE Express Regional Jakarta</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial-card fade-up delay-2">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"Payroll yang dulu 3 hari kerja, sekarang 30 menit. Slip gaji digital, perhitungan BPJS/PPh21 otomatis, audit trail lengkap. HR team kami nangis senang pertama kali jalanin."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SM</div>
+              <div>
+                <div class="testimonial-name">Siti Maryam</div>
+                <div class="testimonial-role">HR Director, PT Sinar Abadi Group</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / CTA -->
+    <section id="about" class="section" style="background: var(--color-bg-alt);" aria-labelledby="about-title">
+      <div class="container">
+        <div class="grid grid-2" style="align-items: center; gap: var(--space-16);">
+          <div>
+            <span class="section-tag">Tentang Kami</span>
+            <h2 id="about-title">AppSheet Indonesia: Mitra Transformasi Digital Anda</h2>
+            <p style="margin-bottom: var(--space-6);">Kami adalah tim certified AppSheet developers & Google Cloud partners yang fokus membangun solusi no-code/low-code untuk enterprise Indonesia. Berpengalaman 5+ tahun, 150+ aplikasi, 40+ klien dari startup hingga BUMN.</p>
+            <p style="margin-bottom: var(--space-6);">Berbeda dengan agency umum: kami tidak hanya 'ngoding'. Kami mendesain arsitektur data yang scalable, mengajarkan tim internal Anda (knowledge transfer), dan menjamin aplikasi bisa di-maintain tanpa vendor lock-in.</p>
+            <div class="flex gap-4 flex-wrap">
+              <a href="#contact" class="btn btn-primary">Mulai Diskusi Proyek</a>
+              <a href="#" class="btn btn-secondary">Unduh Company Profile</a>
+            </div>
+          </div>
+          <div class="card" style="background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-card-bg) 100%); border-color: var(--color-accent);">
+            <div style="padding: var(--space-6);">
+              <h3 style="margin-bottom: var(--space-6); color: var(--color-accent);">Mengapa AppSheet Indonesia?</h3>
+              <ul style="display: grid; gap: var(--space-4); list-style: none;">
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Certified AppSheet Developer & Google Cloud Partner</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Full-stack: AppSheet + Apps Script + BigQuery + Looker</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Knowledge transfer wajib — tim Anda jadi mandiri</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Support pasca-go-live 3 bulan (SLA response < 4 jam)</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Harga transparan: fixed price per modul, no hidden cost</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Pengalaman industri: Manufaktur, Logistik, Ritel, Keuangan, HR</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="cta-section" aria-labelledby="contact-title">
+      <div class="container">
+        <span class="section-tag" style="color: rgba(255,255,255,0.6);">Mulai Proyek</span>
+        <h2 id="contact-title">Siap Mengotomatisasi Bisnis Anda?</h2>
+        <p>Ceritakan tantangan Anda — kami akan balas dalam 24 jam dengan estimasi timeline, biaya, & arsitektur solusi awal. Gratis konsultasi 30 menit.</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="https://wa.me/6281234567890?text=Halo%20AppSheet%20Indonesia%2C%20saya%20ingin%20konsultasi%20tentang%20proyek%20AppSheet" class="btn btn-primary" style="background: #25D366; border-color: #25D366;" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
+            Chat via WhatsApp
+          </a>
+          <a href="mailto:hello@appsheetindonesia.com" class="btn btn-secondary" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.

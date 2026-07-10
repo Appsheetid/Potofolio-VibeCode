@@ -1,0 +1,75 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: '[skip ci] Upload "{{path}}"'
+    deleteMedia: '[skip ci] Delete "{{path}}"'
+
+media_folder: static/images
+public_folder: /images
+
+site_url: https://foseid.netlify.app
+logo_url: /images/logo.jpg
+
+collections:
+  - name: "projects"
+    label: "Portfolio Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Short Description", name: "shortDesc", widget: "text", required: true}
+      - {label: "Full Description", name: "description", widget: "markdown", required: true}
+      - {label: "Industry", name: "industry", widget: "select", options: ["Manufaktur", "Logistik", "HR & Payroll", "Ritel", "Keuangan", "Lainnya"], required: true}
+      - {label: "Duration", name: "duration", widget: "string", hint: "Contoh: 6 bulan"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Cover Image", name: "coverImage", widget: "image", required: true}
+      - {label: "Gallery Images", name: "gallery", widget: "list", required: false, fields: [{label: "Image", name: "image", widget: "image"}, {label: "Caption", name: "caption", widget: "string"}]}
+      - {label: "Technologies", name: "technologies", widget: "list", required: true}
+      - {label: "Client Name", name: "client", widget: "string", required: false}
+      - {label: "Project URL (Live Demo)", name: "projectUrl", widget: "string", required: false, pattern: ['https?://.+', 'Must be a valid URL']}
+      - {label: "Case Study URL", name: "caseStudyUrl", widget: "string", required: false, pattern: ['https?://.+', 'Must be a valid URL']}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Publish Date", name: "date", widget: "datetime", default: "", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false}
+
+  - name: "siteSettings"
+    label: "Pengaturan Website"
+    files:
+      - name: "hero"
+        label: "Hero Section"
+        file: "content/settings/hero.json"
+        fields:
+          - {label: "Badge Text", name: "badge", widget: "string", default: "Mitra Resmi Google Cloud & AppSheet"}
+          - {label: "Headline", name: "headline", widget: "markdown", default: "Membangun Aplikasi Bisnis **Tanpa Kode**,<br>Dengan Kecepatan **Enterprise**"}
+          - {label: "Sub-headline", name: "subheadline", widget: "text", default: "AppSheet Indonesia membantu perusahaan mengotomatisasi proses, menggantikan spreadsheet yang rawan error, dan meluncurkan aplikasi custom dalam hitungan hari — bukan bulan."}
+          - {label: "CTA Primary Text", name: "ctaPrimary", widget: "string", default: "Konsultasi Gratis"}
+          - {label: "CTA Secondary Text", name: "ctaSecondary", widget: "string", default: "Lihat Portfolio"}
+          - {label: "Background Image", name: "bgImage", widget: "image", required: false}
+
+      - name: "stats"
+        label: "Statistics Bar"
+        file: "content/settings/stats.json"
+        fields:
+          - {label: "Stat Items", name: "items", widget: "list", fields: [{label: "Value", name: "value", widget: "string"}, {label: "Label", name: "label", widget: "string"}]}
+
+      - name: "contact"
+        label: "Contact Info"
+        file: "content/settings/contact.json"
+        fields:
+          - {label: "WhatsApp Number", name: "whatsapp", widget: "string", default: "6281234567890"}
+          - {label: "Email", name: "email", widget: "string", default: "hello@appsheetindonesia.com"}
+          - {label: "Office Address", name: "address", widget: "text", default: "Curug, Tangerang, Indonesia"}
+          - {label: "Response Time", name: "responseTime", widget: "string", default: "Balasan dalam 1 jam kerja"}
+
+      - name: "footer"
+        label: "Footer"
+        file: "content/settings/footer.json"
+        fields:
+          - {label: "Company Description", name: "description", widget: "text", default: "Mitra pengembangan AppSheet profesional untuk otomatisasi bisnis. Dari spreadsheet ke aplikasi skala produksi."}
+          - {label: "Copyright Text", name: "copyright", widget: "string", default: "© 2024 AppSheet Indonesia. Dibangun dengan ❤ untuk ekosistem Google Workspace."}
+          - {label: "Disclaimer", name: "disclaimer", widget: "string", default: "AppSheet Indonesia adalah mitra independen — bukan afiliasi resmi Google LLC."}
