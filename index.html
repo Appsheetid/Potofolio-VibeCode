@@ -1,1888 +1,753 @@
+
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotoin & Studio Pose - AI Creative Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        emerald: {
-                            400: '#34d399',
-                            500: '#10B981', // Aksen utama
-                            600: '#059669',
-                        },
-                        dark: {
-                            900: '#111827',
-                            800: '#1F2937',
-                            700: '#374151',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #111827; }
-        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #10B981; }
-        
-        .json-key { color: #34d399; }
-        .json-string { color: #facc15; }
-        .json-number { color: #60a5fa; }
-        
-        /* Drag and Drop animation */
-        .dragover {
-            border-color: #10B981 !important;
-            background-color: rgba(16, 185, 129, 0.1) !important;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AppSheet Indonesia — Professional AppSheet Development & Automation Solutions">
+  <title>AppSheet Indonesia — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-alt: #fafafa;
+      --color-text: #171717;
+      --color-text-muted: #525252;
+      --color-text-subtle: #a3a3a3;
+      --color-accent: #000000;
+      --color-accent-hover: #171717;
+      --color-border: #e5e5e5;
+      --color-border-hover: #d4d4d4;
+      --color-card-bg: #ffffff;
+      --color-badge-bg: #f5f5f5;
+      --color-badge-text: #171717;
+      --shadow-sm: rgba(0,0,0,0.04) 0px 1px 2px;
+      --shadow-md: rgba(0,0,0,0.06) 0px 4px 8px -2px, rgba(0,0,0,0.03) 0px 2px 4px -2px;
+      --shadow-lg: rgba(0,0,0,0.08) 0px 12px 24px -8px, rgba(0,0,0,0.04) 0px 8px 16px -8px;
+      --shadow-xl: rgba(0,0,0,0.1) 0px 20px 40px -12px, rgba(0,0,0,0.05) 0px 12px 24px -12px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-pill: 9999px;
+      --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+      --container-max: 1200px;
+      --header-height: 72px;
+      --transition-fast: 120ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0a0a0a;
+        --color-bg-alt: #111111;
+        --color-text: #fafafa;
+        --color-text-muted: #a3a3a3;
+        --color-text-subtle: #737373;
+        --color-accent: #ffffff;
+        --color-accent-hover: #e5e5e5;
+        --color-border: #262626;
+        --color-border-hover: #404040;
+        --color-card-bg: #111111;
+        --color-badge-bg: #1a1a1a;
+        --color-badge-text: #fafafa;
+        --shadow-sm: rgba(0,0,0,0.3) 0px 1px 2px;
+        --shadow-md: rgba(0,0,0,0.4) 0px 4px 8px -2px, rgba(0,0,0,0.2) 0px 2px 4px -2px;
+        --shadow-lg: rgba(0,0,0,0.5) 0px 12px 24px -8px, rgba(0,0,0,0.25) 0px 8px 16px -8px;
+        --shadow-xl: rgba(0,0,0,0.6) 0px 20px 40px -12px, rgba(0,0,0,0.3) 0px 12px 24px -12px;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    h1, h2, h3, h4 { font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
+    h1 { font-size: clamp(36px, 5vw, 56px); }
+    h2 { font-size: clamp(28px, 4vw, 40px); }
+    h3 { font-size: clamp(20px, 2.5vw, 24px); }
+    h4 { font-size: clamp(16px, 2vw, 18px); }
+    p { color: var(--color-text-muted); font-size: 16px; line-height: 1.7; }
+    .text-sm { font-size: 14px; }
+    .text-xs { font-size: 12px; }
+    .text-lg { font-size: 18px; }
+    .font-mono { font-family: var(--font-mono); }
+    .font-light { font-weight: 300; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+
+    a { color: inherit; text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--color-accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text-muted);
+      border-color: transparent;
+      padding: var(--space-2) var(--space-3);
+    }
+    .btn-ghost:hover { color: var(--color-text); background: var(--color-bg-alt); }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
+    .section { padding: var(--space-20) 0; }
+    .section-sm { padding: var(--space-12) 0; }
+
+    .grid { display: grid; gap: var(--space-6); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 1024px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-2 { gap: var(--space-2); }
+    .gap-3 { gap: var(--space-3); }
+    .gap-4 { gap: var(--space-4); }
+    .gap-6 { gap: var(--space-6); }
+    .gap-8 { gap: var(--space-8); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      background: rgba(var(--color-bg-rgb, 255,255,255), 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    @media (prefers-color-scheme: dark) {
+      header { background: rgba(var(--color-bg-rgb, 10,10,10), 0.85); }
+    }
+    .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: var(--space-2); font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+    .logo-mark { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--color-accent); display: flex; align-items: center; justify-content: center; color: var(--color-bg); font-weight: 700; font-size: 14px; }
+    .nav { display: flex; align-items: center; gap: var(--space-6); }
+    .nav-link { font-size: 14px; font-weight: 500; color: var(--color-text-muted); padding: var(--space-2) 0; position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-accent); transition: width var(--transition-base); }
+    .nav-link:hover { color: var(--color-text); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--color-text); }
+    .nav-link.active::after { width: 100%; }
+    .mobile-menu-btn { display: none; padding: var(--space-2); }
+
+    @media (max-width: 768px) {
+      .nav { position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border); flex-direction: column; padding: var(--space-6); gap: var(--space-4); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all var(--transition-base); }
+      .nav.open { transform: translateY(0); opacity: 1; visibility: visible; }
+      .mobile-menu-btn { display: flex; }
+    }
+
+    .hero { padding: var(--space-24) 0 var(--space-20); }
+    .hero-content { max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; margin-bottom: var(--space-6); }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { margin-bottom: var(--space-6); }
+    .hero p { font-size: clamp(18px, 2.5vw, 22px); color: var(--color-text-muted); margin-bottom: var(--space-8); max-width: 600px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+    .stats-bar { padding: var(--space-10) 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-20); }
+    .stat { text-align: center; padding: 0 var(--space-4); }
+    .stat-value { font-size: clamp(32px, 5vw, 48px); font-weight: 600; letter-spacing: -0.03em; color: var(--color-text); line-height: 1.1; }
+    .stat-label { font-size: 14px; color: var(--color-text-muted); margin-top: var(--space-2); font-weight: 500; }
+
+    .section-header { margin-bottom: var(--space-12); }
+    .section-tag { display: inline-block; font-size: 13px; font-weight: 500; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3); }
+    .section-header h2 { margin-bottom: var(--space-3); }
+    .section-header p { max-width: 600px; }
+
+    .card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .card-icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); margin-bottom: var(--space-4); transition: all var(--transition-fast); }
+    .card:hover .card-icon { background: var(--color-accent); color: var(--color-bg); }
+    .card h3 { margin-bottom: var(--space-2); }
+    .card p { flex: 1; margin-bottom: var(--space-4); }
+    .card-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
+    .tag { font-size: 12px; font-weight: 500; padding: var(--space-1) var(--space-3); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-family: var(--font-mono); }
+
+    .project-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+    .project-card:hover { border-color: var(--color-border-hover); box-shadow: var(--shadow-xl); transform: translateY(-4px); }
+    .project-image { aspect-ratio: 16/10; background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%); position: relative; overflow: hidden; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--transition-slow); }
+    .project-image.loaded img { opacity: 1; }
+    .project-content { padding: var(--space-6); }
+    .project-meta { display: flex; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
+    .project-title { font-size: 20px; font-weight: 600; margin-bottom: var(--space-2); }
+    .project-desc { color: var(--color-text-muted); margin-bottom: var(--space-4); line-height: 1.7; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+    .project-link { font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: var(--space-2); }
+    .project-link svg { transition: transform var(--transition-fast); }
+    .project-link:hover svg { transform: translateX(4px); }
+
+    .service-card { text-align: center; padding: var(--space-8); }
+    .service-icon { width: 64px; height: 64px; margin: 0 auto var(--space-5); border-radius: var(--radius-xl); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); transition: all var(--transition-base); }
+    .service-card:hover .service-icon { background: var(--color-accent); color: var(--color-bg); transform: scale(1.05); }
+    .service-card h3 { margin-bottom: var(--space-3); }
+    .service-card p { margin-bottom: var(--space-5); }
+    .service-features { display: flex; flex-direction: column; gap: var(--space-2); text-align: left; }
+    .service-feature { display: flex; align-items: center; gap: var(--space-2); font-size: 14px; color: var(--color-text-muted); }
+    .service-feature::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; }
+
+    .testimonial-card { text-align: left; }
+    .testimonial-stars { display: flex; gap: 2px; margin-bottom: var(--space-4); color: #fbbf24; }
+    .testimonial-text { font-size: 18px; line-height: 1.7; color: var(--color-text); margin-bottom: var(--space-6); font-weight: 400; }
+    .testimonial-author { display: flex; align-items: center; gap: var(--space-3); }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--color-border) 0%, var(--color-bg-alt) 100%); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-text-muted); font-size: 16px; }
+    .testimonial-name { font-weight: 600; }
+    .testimonial-role { font-size: 14px; color: var(--color-text-muted); }
+
+    .cta-section { background: var(--color-accent); color: var(--color-bg); padding: var(--space-20) 0; text-align: center; }
+    .cta-section h2 { color: inherit; margin-bottom: var(--space-4); }
+    .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto var(--space-8); }
+    .cta-section .btn-primary { background: var(--color-bg); color: var(--color-accent); }
+    .cta-section .btn-primary:hover { background: var(--color-bg-alt); }
+    .cta-section .btn-secondary { border-color: rgba(255,255,255,0.3); color: var(--color-bg); }
+    .cta-section .btn-secondary:hover { border-color: var(--color-bg); background: rgba(255,255,255,0.1); }
+
+    footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-16) 0 var(--space-8); }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-10); margin-bottom: var(--space-12); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand p { color: var(--color-text-muted); margin-top: var(--space-4); max-width: 300px; }
+    .footer-social { display: flex; gap: var(--space-3); margin-top: var(--space-6); }
+    .footer-social a { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-card-bg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); transition: all var(--transition-fast); }
+    .footer-social a:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-bg); }
+    .footer-title { font-weight: 600; margin-bottom: var(--space-4); font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-subtle); }
+    .footer-links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer-links a { font-size: 14px; color: var(--color-text-muted); transition: color var(--transition-fast); }
+    .footer-links a:hover { color: var(--color-accent); }
+    .footer-bottom { padding-top: var(--space-8); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); }
+    .footer-bottom p { font-size: 14px; color: var(--color-text-subtle); margin: 0; }
+
+    .fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 100ms; }
+    .delay-2 { animation-delay: 200ms; }
+    .delay-3 { animation-delay: 300ms; }
+    .delay-4 { animation-delay: 400ms; }
+    .delay-5 { animation-delay: 500ms; }
+    .delay-6 { animation-delay: 600ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+
+    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
+  </style>
 </head>
-<body class="bg-dark-900 text-gray-200 font-sans h-screen flex overflow-hidden relative">
-
-    <!-- Global Toast Container -->
-    <div id="toast-container" class="fixed top-4 right-4 z-[60] flex flex-col gap-2"></div>
-
-    <!-- Image Zoom Modal -->
-    <div id="zoom-modal" class="hidden fixed inset-0 z-[100] bg-dark-900/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 opacity-0 transition-opacity duration-300">
-        <button onclick="window.closeZoomModal()" class="absolute top-4 right-4 sm:top-8 sm:right-8 p-3 bg-dark-800 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-full transition-colors z-[110]" title="Tutup">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <img id="zoom-modal-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl scale-95 transition-transform duration-300">
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="AppSheet Indonesia Home">
+        <span class="logo-mark">AI</span>
+        AppSheet Indonesia
+      </a>
+      <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <a href="#projects" class="nav-link">Proyek</a>
+        <a href="#services" class="nav-link">Layanan</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#contact" class="btn btn-primary">Mulai Proyek</a>
+      </nav>
+      <button class="mobile-menu-btn btn btn-ghost" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
     </div>
+  </header>
 
-    <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" class="hidden fixed inset-0 z-[100] bg-dark-900/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 opacity-0 transition-opacity duration-300">
-        <div id="delete-modal-content" class="bg-dark-800 border border-dark-700 rounded-xl p-6 max-w-sm w-full shadow-2xl transform scale-95 transition-transform duration-300">
-            <h3 class="text-lg font-medium text-white mb-2 flex items-center gap-2">
-                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                Hapus API Key
-            </h3>
-            <p class="text-sm text-gray-400 mb-6">Apakah Anda yakin ingin menghapus API Key ini dari penyimpanan lokal? Tindakan ini tidak dapat dibatalkan.</p>
-            <div class="flex justify-end gap-3">
-                <button onclick="window.closeDeleteModal()" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium transition-colors">Batal</button>
-                <button onclick="window.confirmDeleteApiKey()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium transition-colors">Ya, Hapus</button>
-            </div>
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge fade-up">Mitra Resmi Google Cloud & AppSheet</span>
+          <h1 id="hero-title" class="fade-up delay-1">Membangun Aplikasi Bisnis Tanpa Kode,<br>Dengan Kecepatan Enterprise</h1>
+          <p class="fade-up delay-2">AppSheet Indonesia membantu perusahaan mengotomatisasi proses, menggantikan spreadsheet yang rawan error, dan meluncurkan aplikasi custom dalam hitungan hari — bukan bulan.</p>
+          <div class="hero-actions fade-up delay-3">
+            <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
+            <a href="#projects" class="btn btn-secondary">Lihat Portfolio</a>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col h-full flex-shrink-0 transition-all duration-300 z-20">
-        <div class="p-6 flex items-center gap-3 border-b border-dark-700">
-            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-emerald-500/20">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            </div>
-            <span class="font-bold text-lg text-white tracking-wide">Fotoin AI</span>
+    <!-- Stats Bar -->
+    <section class="stats-bar" aria-label="Statistik AppSheet Indonesia">
+      <div class="container">
+        <div class="flex justify-between gap-6">
+          <div class="stat fade-up">
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Aplikasi Dibangun</div>
+          </div>
+          <div class="stat fade-up delay-1">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Pengurangan Waktu Dev</div>
+          </div>
+          <div class="stat fade-up delay-2">
+            <div class="stat-value">40+</div>
+            <div class="stat-label">Klien Enterprise</div>
+          </div>
+          <div class="stat fade-up delay-3">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime Aplikasi</div>
+          </div>
         </div>
-        
-        <nav class="flex-1 overflow-y-auto py-4">
-            <ul class="space-y-1 px-3">
-                <li>
-                    <button onclick="window.switchTab('modul1')" id="nav-modul1" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-emerald-500/10 text-emerald-400 font-medium transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        Ekstraksi Konteks
-                    </button>
-                </li>
-                <li>
-                    <button onclick="window.switchTab('modul2')" id="nav-modul2" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-dark-700 hover:text-gray-200 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-                        AI Stylist
-                    </button>
-                </li>
-                <li>
-                    <button onclick="window.switchTab('modul3')" id="nav-modul3" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-dark-700 hover:text-gray-200 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        Studio Pose
-                    </button>
-                </li>
-                <li>
-                    <button onclick="window.switchTab('modul4')" id="nav-modul4" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-dark-700 hover:text-gray-200 transition-colors mt-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                        Virtual Fitting
-                    </button>
-                </li>
-                <li class="pt-4 mt-4 border-t border-dark-700">
-                    <span class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Enterprise</span>
-                </li>
-                <li>
-                    <button onclick="window.switchTab('admin')" id="nav-admin" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-dark-700 hover:text-gray-200 transition-colors mt-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        API Key & Logs
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        <div class="p-4 border-t border-dark-700 text-xs text-gray-500 text-center">
-            v2.6 Stable Build
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Portfolio Terpilih</span>
+          <h2 id="projects-title">Proyek-Proyek Nyata, Dampak Nyata</h2>
+          <p>Beberapa solusi yang kami bangun untuk klien dari berbagai industri — manufaktur, logistik, keuangan, hingga ritel.</p>
         </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-y-auto bg-dark-900 relative">
-        
-        <!-- Header -->
-        <header class="p-6 border-b border-dark-700 flex justify-between items-center sticky top-0 bg-dark-900/90 backdrop-blur-sm z-10">
-            <h1 id="page-title" class="text-2xl font-bold text-white">Ekstraksi Konteks (Vision)</h1>
-            <div class="flex items-center gap-4">
-                <div class="px-3 py-1 bg-dark-800 rounded-full text-sm flex items-center gap-2 border border-dark-700">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-                    Sistem Online
-                </div>
+        <div class="grid grid-2">
+          <!-- Project 1 -->
+          <article class="project-card fade-up">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="object-fit: cover;">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="200" height="32" rx="4" fill="#d4d4d4"/>
+                <rect x="120" y="170" width="560" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="120" y="200" width="560" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="230" width="180" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="350" width="160" height="40" rx="8" fill="#171717"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Dashboard Manufaktur — Preview UI</text>
+              </svg>
             </div>
-        </header>
-
-        <div class="p-6 flex-1 max-w-7xl mx-auto w-full flex flex-col gap-6">
-
-            <!-- TAB CONTENT: Modul 1 (Ekstraksi Konteks) -->
-            <div id="tab-modul1" class="tab-content flex-1 flex flex-col gap-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                    
-                    <!-- Kiri: Upload Gambar / Dokumen -->
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4">
-                        <div class="flex justify-between items-center border-b border-dark-700 pb-2">
-                            <h3 class="font-medium text-gray-300">File Referensi</h3>
-                            <button onclick="window.resetM1File()" class="text-xs px-3 py-1 bg-dark-700 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded transition-colors hidden" id="m1-reset-btn">Hapus</button>
-                        </div>
-                        
-                        <div id="m1-dropzone" class="w-full flex-1 min-h-[350px] bg-dark-900 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group">
-                            <!-- Support gambar dan PDF/Text docs -->
-                            <input type="file" id="m1-file-input" class="hidden" accept="image/*, application/pdf, text/plain, .doc, .docx" />
-                            
-                            <div id="m1-empty-state" class="flex flex-col items-center text-center p-4">
-                                <div class="w-16 h-16 mb-4 rounded-full bg-dark-800 group-hover:bg-emerald-500/20 flex items-center justify-center transition-colors">
-                                    <svg class="w-8 h-8 text-gray-400 group-hover:text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                </div>
-                                <h3 class="text-lg font-medium text-gray-200 mb-1">Klik, Drop, atau Paste File</h3>
-                                <p class="text-sm text-gray-500">Mendukung Gambar, PDF, TXT, DOC</p>
-                            </div>
-                            
-                            <!-- Image Preview -->
-                            <img id="m1-original-preview" src="" class="hidden absolute inset-0 w-full h-full object-contain bg-dark-900 z-10">
-                            
-                            <!-- Document Preview -->
-                            <div id="m1-doc-preview" class="hidden absolute inset-0 bg-dark-900 z-10 flex-col items-center justify-center p-6 text-center">
-                                <svg class="w-16 h-16 text-emerald-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                <span id="m1-doc-name" class="text-gray-200 font-medium break-all w-full"></span>
-                                <span class="text-xs text-gray-500 mt-2">Dokumen Terlampir</span>
-                            </div>
-
-                            <div id="m1-hover-overlay" class="hidden absolute inset-0 bg-dark-900/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                <span class="px-4 py-2 bg-dark-800 border border-dark-700 text-white rounded text-sm font-medium">GANTI FILE</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kanan: Hasil Ekstraksi / Resume -->
-                    <div class="flex flex-col gap-4 bg-dark-800 border border-dark-700 rounded-xl p-4">
-                        <div class="flex justify-between items-end border-b border-dark-700 pb-2">
-                            <div>
-                                <h2 class="text-lg font-medium" id="m1-output-title">Hasil Ekstraksi</h2>
-                            </div>
-                            <button onclick="window.runModul1()" id="btn-modul1" class="px-6 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                Ekstrak Konteks
-                            </button>
-                        </div>
-                        
-                        <div class="bg-dark-900 border border-dark-700 rounded-lg flex-1 flex flex-col overflow-hidden relative min-h-[300px]">
-                            <div class="bg-dark-800 px-4 py-2 border-b border-dark-700 flex justify-between items-center text-sm text-gray-400 font-mono">
-                                <span id="m1-output-filename">output.json</span>
-                                <div class="flex items-center gap-3">
-                                    <button onclick="window.downloadM1Result()" id="m1-download-btn" class="hover:text-emerald-400 transition-colors hidden" title="Download Hasil">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                    </button>
-                                    <button onclick="window.copyJSON()" class="hover:text-emerald-400 transition-colors" title="Copy to clipboard">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="p-4 overflow-y-auto flex-1 font-mono text-sm whitespace-pre-wrap relative" id="modul1-output">
-                                <span class="text-gray-500 italic">Hasil ekstraksi atribut gambar atau resume dokumen akan muncul di sini...</span>
-                            </div>
-                            <!-- Loader -->
-                            <div id="loader-modul1" class="hidden absolute inset-0 bg-dark-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                                <div class="w-10 h-10 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
-                                <p class="mt-4 text-emerald-400 text-sm font-medium animate-pulse" id="m1-loader-text">Menganalisis file...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Google Sheets</span>
+                <span class="tag">BigQuery</span>
+              </div>
+              <h3 class="project-title">Sistem Manajemen Produksi Real-time</h3>
+              <p class="project-desc">Aplikasi lengkap untuk pabrik manufaktur: tracking work order, monitoring mesin OEE, manajemen inventory bahan baku, dan dashboard KPI real-time untuk manajemen.</p>
+              <div class="project-tags">
+                <span class="tag">Real-time Sync</span>
+                <span class="tag">Role-based Access</span>
+                <span class="tag">Offline Mode</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Manufaktur • 3 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
             </div>
+          </article>
 
-            <!-- TAB CONTENT: Modul 2 (AI Stylist) -->
-            <div id="tab-modul2" class="tab-content hidden flex-col gap-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                    
-                    <!-- Left: Original Input -->
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4">
-                        <div class="flex justify-between items-center border-b border-dark-700 pb-2">
-                            <h3 class="font-medium text-gray-300">Gambar Referensi</h3>
-                            <button onclick="window.resetM2M3File()" class="text-xs px-3 py-1 bg-dark-700 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded transition-colors hidden" id="m2-reset-btn">Hapus</button>
-                        </div>
-                        <div id="m2-dropzone" class="w-full flex-1 min-h-[250px] bg-dark-900 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group">
-                            <input type="file" id="m2-file-input" class="hidden" accept="image/jpeg, image/png, image/webp" />
-                            <div id="m2-empty-state" class="flex flex-col items-center text-center p-4">
-                                <svg class="w-10 h-10 text-gray-400 group-hover:text-emerald-500 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                <span class="text-sm text-gray-400">Klik, Drop, atau Paste Gambar</span>
-                            </div>
-                            <img id="m2-original-preview" src="" class="hidden absolute inset-0 w-full h-full object-contain bg-dark-900 z-10">
-                            <div id="m2-hover-overlay" class="hidden absolute inset-0 bg-dark-900/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                <span class="px-4 py-2 bg-dark-800 border border-dark-700 text-white rounded text-sm font-medium">GANTI FOTO</span>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-3 mt-auto pt-2">
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Tema Spesifik (Theme Options)</label>
-                                <select id="m2-theme" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                    <option value="">Bebas (Tanpa Tema Spesifik)</option>
-                                    <option value="dengan suasana Ulang Tahun (Birthday Party) yang meriah, dekorasi balon dan kue">Ulang Tahun (Birthday)</option>
-                                    <option value="dengan suasana romantis Anniversary, dekorasi elegan, bunga, dan lilin">Anniversary (Romantis)</option>
-                                    <option value="dengan gaya Karyawan Kantor profesional di lingkungan gedung perkantoran modern">Karyawan Kantor (Office)</option>
-                                    <option value="dengan tema Cyberpunk futuristik, lampu neon kota malam">Cyberpunk / Sci-Fi</option>
-                                    <option value="dengan tema Pernikahan (Wedding) yang anggun, elegan, dengan gaun/jas dan dekorasi bunga">Pernikahan (Wedding)</option>
-                                    <option value="dengan suasana liburan musim dingin dengan salju, pakaian hangat musim dingin">Musim Dingin (Salju)</option>
-                                    <option value="dalam dunia fantasi / Fairytale yang magis dengan elemen alam ajaib dan pencahayaan ethereal">Fantasi / Fairytale</option>
-                                    <option value="dengan tema Baby Born (Bayi Baru Lahir) yang lembut, imut, dan hangat">Baby Born</option>
-                                    <option value="dengan suasana ibadah Umrah / Haji di Tanah Suci, nuansa religius, pakaian ihram/muslim">Umrah / Haji</option>
-                                    <option value="dalam format Pas Foto Berwarna yang formal, wajah menghadap depan, background polos rapi">Pas Foto Berwarna</option>
-                                    <option value="dengan konsep Maternity (Ibu Hamil) yang elegan, hangat, dan menawan">Maternity</option>
-                                    <option value="diubah menjadi desain Logo yang ikonik, vektor, minimalis, dan profesional">Logo</option>
-                                    <option value="diubah menjadi komposisi Banner/Poster promosi, ruang teks luas, desain komersial">Banner</option>
-                                    <option value="dengan gaya Fotografi Produk komersial, pencahayaan studio yang tajam, sangat detail">Produk</option>
-                                    <option value="sebagai 3D Render berkualitas tinggi bergaya CGI / Unreal Engine, pencahayaan dramatis">3D Render</option>
-                                    <option value="dengan gaya Kartun (Cartoon) 2D yang ceria, colorful, outline tegas">Kartun</option>
-                                    <option value="dengan gaya sangat Realistis (Photorealistic), detail super tajam 8k, tekstur nyata">Realistis</option>
-                                    <option value="dengan gaya Karikatur 3D Kartun bergaya Pixar/Disney, ekspresif, proporsi lucu">Karikatur 3D Kartun</option>
-                                    <option value="dengan gaya Anime Jepang klasik, ilustrasi animasi, outline presisi">Anime</option>
-                                    <option value="sebagai desain Stiker Lucu (Kawaii Sticker), flat color, dengan outline putih tebal di sekelilingnya">Stiker Lucu</option>
-                                    <option value="dengan gaya Komik Amerika (US Comic), tinta tebal, bayangan dramatis, gaya superhero">Komik US</option>
-                                    <option value="dengan gaya Klasik (Vintage/Retro), warna sepia atau estetika jadul yang estetik">Klasik</option>
-                                    <option value="sebagai karya Seni Lukis (Painting), sapuan kuas artistik, gaya oil painting atau kanvas">Seni Lukis</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Prompt Modifikasi Khusus</label>
-                                <textarea id="m2-prompt" rows="2" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors" placeholder="Tambahkan gaya lain... (Contoh: Ubah baju jadi warna biru muda)"></textarea>
-                            </div>
-                            <div class="flex gap-2">
-                                <div class="flex-1">
-                                    <label class="block text-xs text-gray-400 mb-1">Rasio Aspek</label>
-                                    <select id="m2-ratio" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500">
-                                        <option value="1:1">1:1 (Square)</option>
-                                        <option value="4:5" selected>4:5 (Portrait)</option>
-                                        <option value="9:16">9:16 (Stories)</option>
-                                        <option value="16:9">16:9 (Landscape)</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-end">
-                                    <button onclick="window.runModul2()" id="btn-modul2" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50 h-[42px]">
-                                        Generate
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Result -->
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4">
-                         <div class="flex justify-between items-center border-b border-dark-700 pb-2">
-                             <h3 class="font-medium text-gray-300">Hasil Render AI</h3>
-                             <div class="flex items-center gap-3">
-                                 <button onclick="window.openZoomModal(document.getElementById('m2-result-img').src)" class="text-emerald-400 hover:text-emerald-300 text-sm flex items-center gap-1 hidden" id="m2-zoom-btn">
-                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                     Perbesar
-                                 </button>
-                                 <button onclick="window.downloadImg('m2-result-img', 'AI-Stylist.png')" class="text-emerald-400 hover:text-emerald-300 text-sm flex items-center gap-1 hidden" id="m2-download-btn">
-                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                     Unduh
-                                 </button>
-                             </div>
-                         </div>
-                        <div class="w-full flex-1 min-h-[300px] bg-dark-900 rounded-lg flex items-center justify-center overflow-hidden border border-dark-700 relative">
-                            <img id="m2-result-img" src="" class="hidden w-full h-full object-contain">
-                            <span id="m2-result-text" class="text-sm text-gray-600">Menunggu generate...</span>
-                            
-                            <!-- Loader -->
-                            <div id="loader-modul2" class="hidden absolute inset-0 bg-dark-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                                <div class="w-10 h-10 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
-                                <p class="mt-4 text-emerald-400 text-sm font-medium animate-pulse text-center px-4">Proses Image-to-Image berjalan...<br><span class="text-xs text-gray-400">Model: gemini-2.5-flash-image</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <!-- Project 2 -->
+          <article class="project-card fade-up delay-1">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="120" height="120" rx="12" fill="#d4d4d4"/>
+                <rect x="260" y="140" width="200" height="24" rx="4" fill="#d4d4d4"/>
+                <rect x="260" y="180" width="300" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="260" y="210" width="300" height="16" rx="4" fill="#e5e5e5"/>
+                <rect x="120" y="260" width="440" height="120" rx="8" fill="#f5f5f5"/>
+                <rect x="140" y="280" width="100" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="140" y="310" width="200" height="12" rx="4" fill="#e5e5e5"/>
+                <rect x="140" y="335" width="150" height="12" rx="4" fill="#e5e5e5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Logistics Tracking — Mobile View</text>
+              </svg>
             </div>
-
-            <!-- TAB CONTENT: Modul 3 (Studio Pose) -->
-            <div id="tab-modul3" class="tab-content hidden flex-col gap-6">
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Kolom Kiri: Upload & Pengaturan -->
-                    <div class="lg:col-span-1 bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4 max-h-[calc(100vh-140px)] overflow-y-auto">
-                        <div class="flex justify-between items-center border-b border-dark-700 pb-2">
-                            <h3 class="font-medium text-gray-300">Gambar Referensi</h3>
-                            <span class="text-xs text-gray-400 bg-dark-900 border border-dark-700 px-2 py-1 rounded" id="m3-image-count">0/4</span>
-                        </div>
-                        
-                        <!-- Area Multi-Upload Grid -->
-                        <div class="w-full bg-dark-900 rounded-lg border border-dark-700 p-3 overflow-y-auto transition-colors" id="m3-dropzone-area">
-                            <div id="m3-image-grid" class="grid grid-cols-3 gap-3">
-                                <!-- Add Button Thumbnail -->
-                                <div id="m3-image-add" class="aspect-square bg-dark-800 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-md flex flex-col items-center justify-center cursor-pointer transition-colors text-gray-500 hover:text-emerald-500">
-                                    <input type="file" id="m3-file-input" class="hidden" accept="image/jpeg, image/png, image/webp" multiple />
-                                    <svg class="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                    <span class="text-[10px] font-medium">Tambah</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-4 mt-2">
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Kamera / Sudut Pose</label>
-                                <select id="m3-angle" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500">
-                                    <option value="Eye Level, looking directly at camera, confident pose">Eye Level (Normal)</option>
-                                    <option value="Low Angle shot, looking down at camera, heroic pose">Low Angle (Heroic)</option>
-                                    <option value="High Angle shot, looking up at camera, dynamic pose">High Angle</option>
-                                    <option value="Side Profile view, looking away, elegant pose">Side Profile</option>
-                                    <option value="Action pose, mid-movement, dynamic lighting">Action / Mid-Movement</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Tema Spesifik (Theme Options)</label>
-                                <select id="m3-theme" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                    <option value="">Sesuai Gambar Asli</option>
-                                    <option value="dengan suasana Ulang Tahun (Birthday Party) yang meriah, dekorasi balon dan kue">Ulang Tahun (Birthday)</option>
-                                    <option value="dengan suasana romantis Anniversary, dekorasi elegan, bunga, dan lilin">Anniversary (Romantis)</option>
-                                    <option value="dengan gaya Karyawan Kantor profesional di lingkungan gedung perkantoran modern">Karyawan Kantor (Office)</option>
-                                    <option value="dengan tema Cyberpunk futuristik, lampu neon kota malam">Cyberpunk / Sci-Fi</option>
-                                    <option value="dengan tema Pernikahan (Wedding) yang anggun, elegan, dengan gaun/jas dan dekorasi bunga">Pernikahan (Wedding)</option>
-                                    <option value="dengan suasana liburan musim dingin dengan salju, pakaian hangat musim dingin">Musim Dingin (Salju)</option>
-                                    <option value="dalam dunia fantasi / Fairytale yang magis dengan elemen alam ajaib dan pencahayaan ethereal">Fantasi / Fairytale</option>
-                                    <option value="dengan tema Baby Born (Bayi Baru Lahir) yang lembut, imut, dan hangat">Baby Born</option>
-                                    <option value="dengan suasana ibadah Umrah / Haji di Tanah Suci, nuansa religius, pakaian ihram/muslim">Umrah / Haji</option>
-                                    <option value="dalam format Pas Foto Berwarna yang formal, wajah menghadap depan, background polos rapi">Pas Foto Berwarna</option>
-                                    <option value="dengan konsep Maternity (Ibu Hamil) yang elegan, hangat, dan menawan">Maternity</option>
-                                    <option value="dengan gaya sangat Realistis (Photorealistic), detail super tajam 8k, tekstur nyata">Realistis</option>
-                                    <option value="dengan gaya Karikatur 3D Kartun bergaya Pixar/Disney, ekspresif, proporsi lucu">Karikatur 3D Kartun</option>
-                                    <option value="dengan gaya Anime Jepang klasik, ilustrasi animasi, outline presisi">Anime</option>
-                                    <option value="sebagai desain Stiker Lucu (Kawaii Sticker), flat color, dengan outline putih tebal">Stiker Lucu</option>
-                                    <option value="dengan gaya Komik Amerika (US Comic), tinta tebal, bayangan dramatis">Komik US</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Prompt Modifikasi Khusus</label>
-                                <textarea id="m3-prompt" rows="2" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-3 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors" placeholder="Tambahkan gaya lain... (Cth: Pegang kacamata hitam)"></textarea>
-                            </div>
-                            <div class="flex gap-2">
-                                <div class="flex-1">
-                                    <label class="block text-xs text-gray-400 mb-1">Rasio Aspek</label>
-                                    <select id="m3-ratio" class="w-full bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500">
-                                        <option value="1:1">1:1 (Square)</option>
-                                        <option value="4:5" selected>4:5 (Portrait)</option>
-                                        <option value="9:16">9:16 (Stories)</option>
-                                        <option value="16:9">16:9 (Landscape)</option>
-                                    </select>
-                                </div>
-                                <div class="flex-1">
-                                    <label class="block text-xs text-gray-400 mb-1">Jumlah Variasi</label>
-                                    <input type="range" id="m3-count" min="1" max="4" value="1" class="w-full accent-emerald-500 mt-2" oninput="document.getElementById('m3-count-val').innerText = this.value">
-                                    <div class="text-xs text-center text-gray-500 mt-1"><span id="m3-count-val">1</span> Gambar</div>
-                                </div>
-                            </div>
-                            <button onclick="window.runModul3()" id="btn-modul3" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50 mt-1">
-                                Generate Batch Pose
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Kolom Kanan: Hasil Batch -->
-                    <div class="lg:col-span-2 relative min-h-[400px] bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col overflow-hidden">
-                         <div class="flex justify-between items-center border-b border-dark-700 pb-2 mb-4 shrink-0">
-                             <h3 class="font-medium text-gray-300">Hasil Studio Pose</h3>
-                         </div>
-                         
-                         <!-- Loader -->
-                         <div id="loader-modul3" class="hidden absolute inset-0 bg-dark-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-xl">
-                            <div class="flex gap-2">
-                                <div class="w-3 h-3 bg-emerald-500 rounded-full animate-bounce" style="animation-delay: 0s"></div>
-                                <div class="w-3 h-3 bg-emerald-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                                <div class="w-3 h-3 bg-emerald-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                            </div>
-                            <p class="mt-4 text-emerald-400 text-sm font-medium animate-pulse">Menghasilkan pose baru...</p>
-                        </div>
-
-                        <!-- Grid untuk 4 item disesuaikan (2x2 pada layar cukup besar) -->
-                        <div id="m3-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start w-full h-full overflow-y-auto pr-2 pb-2">
-                            <div class="col-span-full text-center py-20 text-gray-600 text-sm flex flex-col items-center justify-center h-full">
-                                <svg class="w-12 h-12 mb-3 text-dark-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                Hasil batch pose akan tampil di grid ini
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Google Maps API</span>
+                <span class="tag">Apps Script</span>
+              </div>
+              <h3 class="project-title">Aplikasi Logistik & Tracking Kiriman</h3>
+              <p class="project-desc">Solusi end-to-end untuk ekspedisi: booking order, assign kurir, route optimization dengan Google Maps, proof of delivery (foto + tanda tangan), dan notifikasi WhatsApp otomatis.</p>
+              <div class="project-tags">
+                <span class="tag">GPS Tracking</span>
+                <span class="tag">WhatsApp API</span>
+                <span class="tag">PWA</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Logistik • 2 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
             </div>
+          </article>
 
-            <!-- TAB CONTENT: Modul 4 (Virtual Fitting) -->
-            <div id="tab-modul4" class="tab-content hidden flex-col gap-6 h-full">
-                <!-- Sub-Tabs Navigation -->
-                <div class="flex border-b border-dark-700 w-full shrink-0">
-                    <button onclick="window.switchVFTab('model')" id="tab-btn-vf-model" class="px-6 py-3 border-b-2 border-emerald-500 text-emerald-400 font-medium transition-colors">Model Room</button>
-                    <button onclick="window.switchVFTab('fashion')" id="tab-btn-vf-fashion" class="px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-gray-200 font-medium transition-colors">Fashion Room</button>
-                </div>
-
-                <!-- MODEL ROOM CONTENT -->
-                <div id="vf-model-content" class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
-                    <!-- Left Column: Inputs & Action -->
-                    <div class="flex flex-col gap-6">
-                        <!-- Grid Input (Model & Produk) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Kolom Kiri: Model -->
-                            <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col">
-                                <h3 class="font-medium text-gray-300 border-b border-dark-700 pb-2 mb-4 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                    Foto Model (Anda)
-                                </h3>
-                                <div id="nyetak-model-dropzone" class="w-full aspect-[3/4] bg-dark-900 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group">
-                                    <input type="file" id="nyetak-model-input" class="hidden" accept="image/jpeg, image/png, image/webp" />
-                                    <div id="nyetak-model-placeholder" class="flex flex-col items-center text-center p-4">
-                                        <svg class="w-10 h-10 text-gray-400 group-hover:text-emerald-500 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                        <span class="text-sm text-gray-400">Upload Foto Diri</span>
-                                        <span class="text-xs text-gray-600 mt-1">Drag & Drop kesini</span>
-                                    </div>
-                                    <img id="nyetak-model-preview" src="" class="hidden absolute inset-0 w-full h-full object-cover z-10">
-                                    <div id="nyetak-model-hover" class="hidden absolute inset-0 bg-dark-900/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                        <span class="px-4 py-2 bg-dark-800 border border-dark-700 text-white rounded text-sm font-medium">GANTI FOTO</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Kolom Kanan: Produk -->
-                            <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col">
-                                <div class="flex justify-between items-center border-b border-dark-700 pb-2 mb-4">
-                                    <h3 class="font-medium text-gray-300 flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                        Pakaian / Baju
-                                    </h3>
-                                    <span class="text-xs text-gray-400 bg-dark-900 border border-dark-700 px-2 py-1 rounded" id="nyetak-product-count">0/9</span>
-                                </div>
-                                <div class="w-full aspect-[3/4] bg-dark-900 rounded-lg border border-dark-700 p-3 overflow-y-auto">
-                                    <div id="nyetak-product-grid" class="grid grid-cols-3 gap-3">
-                                        <!-- Add Button Thumbnail -->
-                                        <div id="nyetak-product-add" class="aspect-square bg-dark-800 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-md flex flex-col items-center justify-center cursor-pointer transition-colors text-gray-500 hover:text-emerald-500">
-                                            <input type="file" id="nyetak-product-input" class="hidden" accept="image/jpeg, image/png, image/webp" multiple />
-                                            <svg class="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                            <span class="text-[10px] font-medium">Tambah</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer Action Model Room -->
-                        <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-wrap gap-4 items-center justify-between mt-auto">
-                            <div class="flex items-center gap-6">
-                                <div class="flex items-center gap-3">
-                                    <label class="text-sm font-medium text-gray-400">Rasio Aspek:</label>
-                                    <select id="nyetak-ratio" class="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                        <option value="9:16">9:16 (Story)</option>
-                                        <option value="16:9">16:9 (Landscape)</option>
-                                        <option value="1:1">1:1 (Feed)</option>
-                                        <option value="3:4" selected>3:4 (Portrait)</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center gap-3 border-l border-dark-700 pl-6">
-                                    <label class="text-sm font-medium text-gray-400">Variasi:</label>
-                                    <input type="range" id="nyetak-count" min="1" max="4" value="1" class="w-20 accent-emerald-500" oninput="document.getElementById('nyetak-count-val').innerText = this.value">
-                                    <span id="nyetak-count-val" class="text-gray-200 text-sm font-medium w-4">1</span>
-                                </div>
-                            </div>
-                            <button onclick="window.runModul4()" id="btn-modul4" class="px-8 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50">
-                                Generate Fitting
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Result Grid Model Room -->
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4 h-full overflow-hidden">
-                         <div class="flex justify-between items-center border-b border-dark-700 pb-2 shrink-0">
-                             <h3 class="font-medium text-gray-300">Hasil Fitting AI</h3>
-                         </div>
-                         
-                        <div class="w-full flex-1 min-h-[400px] bg-dark-900 rounded-lg flex flex-col overflow-hidden border border-dark-700 relative p-4">
-                            <!-- Grid untuk variasi Fitting -->
-                            <div id="nyetak-result-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full h-full content-start overflow-y-auto pr-2 pb-2">
-                                <div class="col-span-full text-center py-20 text-gray-600 text-sm flex flex-col items-center justify-center h-full">
-                                    <svg class="w-12 h-12 mb-3 text-dark-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v10l-4-4m0 0L6 14m4-4v10"></path></svg>
-                                    Hasil fitting akan tampil di grid ini
-                                </div>
-                            </div>
-                            <!-- Loader -->
-                            <div id="loader-modul4" class="hidden absolute inset-0 bg-dark-900/90 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-lg">
-                                <div class="w-12 h-12 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
-                                <p id="nyetak-loader-msg" class="mt-4 text-emerald-400 text-sm font-medium animate-pulse text-center px-4">Menganalisis Foto...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FASHION ROOM CONTENT -->
-                <div id="vf-fashion-content" class="hidden grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
-                    <!-- Left Column: Inputs & Action -->
-                    <div class="flex flex-col gap-6">
-                        <!-- Grid Input (Fashion & Logo) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Kolom Kiri: Fashion -->
-                            <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col">
-                                <h3 class="font-medium text-gray-300 border-b border-dark-700 pb-2 mb-4 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                    Fashion (Pakaian)
-                                </h3>
-                                <div id="fashion-main-dropzone" class="w-full aspect-[3/4] bg-dark-900 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group">
-                                    <input type="file" id="fashion-main-input" class="hidden" accept="image/jpeg, image/png, image/webp" />
-                                    <div id="fashion-main-placeholder" class="flex flex-col items-center text-center p-4">
-                                        <svg class="w-10 h-10 text-gray-400 group-hover:text-emerald-500 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                        <span class="text-sm text-gray-400">Upload Pakaian</span>
-                                    </div>
-                                    <img id="fashion-main-preview" src="" class="hidden absolute inset-0 w-full h-full object-cover z-10">
-                                    <div id="fashion-main-hover" class="hidden absolute inset-0 bg-dark-900/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                        <span class="px-4 py-2 bg-dark-800 border border-dark-700 text-white rounded text-sm font-medium">GANTI</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Kolom Kanan: Logo -->
-                            <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col">
-                                <div class="flex justify-between items-center border-b border-dark-700 pb-2 mb-4">
-                                    <h3 class="font-medium text-gray-300 flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
-                                        Logo (Opsional)
-                                    </h3>
-                                    <button onclick="window.removeFashionLogo()" id="fashion-logo-remove-btn" class="text-xs px-2 py-1 bg-dark-700 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded transition-colors hidden">Hapus</button>
-                                </div>
-                                <div id="fashion-logo-dropzone" class="w-full aspect-[3/4] bg-dark-900 border-2 border-dashed border-dark-700 hover:border-emerald-500 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden group">
-                                    <input type="file" id="fashion-logo-input" class="hidden" accept="image/jpeg, image/png, image/webp" />
-                                    <div id="fashion-logo-placeholder" class="flex flex-col items-center text-center p-4">
-                                        <svg class="w-10 h-10 text-gray-400 group-hover:text-emerald-500 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                        <span class="text-sm text-gray-400">Upload Logo</span>
-                                    </div>
-                                    <img id="fashion-logo-preview" src="" class="hidden absolute inset-0 w-full h-full object-contain p-2 z-10">
-                                    <div id="fashion-logo-hover" class="hidden absolute inset-0 bg-dark-900/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                        <span class="px-4 py-2 bg-dark-800 border border-dark-700 text-white rounded text-sm font-medium">GANTI</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer Action Fashion Room -->
-                        <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4 mt-auto">
-                            <div class="flex flex-wrap items-center gap-4 border-b border-dark-700 pb-4">
-                                <div class="flex flex-col gap-1 w-full sm:w-auto">
-                                    <label class="text-xs font-medium text-gray-400">Rasio Aspek:</label>
-                                    <select id="fashion-ratio" class="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                        <option value="9:16">9:16 (Story)</option>
-                                        <option value="16:9">16:9 (Landscape)</option>
-                                        <option value="1:1">1:1 (Feed)</option>
-                                        <option value="3:4" selected>3:4 (Portrait)</option>
-                                    </select>
-                                </div>
-
-                                <div class="flex flex-col gap-1 w-full sm:w-auto border-l border-dark-700 pl-0 sm:pl-4">
-                                    <label class="text-xs font-medium text-gray-400">Jenis Model:</label>
-                                    <select id="fashion-model-type" class="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                        <option value="Manusia">Manusia (Realistis)</option>
-                                        <option value="Manekin">Manekin (Display)</option>
-                                    </select>
-                                </div>
-
-                                <div class="flex flex-col gap-1 w-full sm:w-auto border-l border-dark-700 pl-0 sm:pl-4">
-                                    <label class="text-xs font-medium text-gray-400">Karakteristik Model:</label>
-                                    <select id="fashion-model-char" class="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                                        <option value="">Default (Pria Dewasa)</option>
-                                        <optgroup label="Laki-Laki" class="bg-dark-800">
-                                            <option value="Laki-Laki (Anak-anak)">Anak-anak</option>
-                                            <option value="Laki-Laki (Remaja)">Remaja</option>
-                                            <option value="Laki-Laki (Dewasa)" selected>Dewasa</option>
-                                            <option value="Laki-Laki (Tua)">Tua</option>
-                                        </optgroup>
-                                        <optgroup label="Perempuan" class="bg-dark-800">
-                                            <option value="Perempuan (Anak-anak)">Anak-anak</option>
-                                            <option value="Perempuan (Remaja)">Remaja</option>
-                                            <option value="Perempuan (Dewasa)">Dewasa</option>
-                                            <option value="Perempuan (Tua)">Tua</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="flex justify-end">
-                                <button onclick="window.runFashionRoom()" id="btn-fashion" class="px-8 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50">
-                                    Generate Fashion
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Result Grid Fashion Room -->
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-4 flex flex-col gap-4 h-full overflow-hidden">
-                         <div class="flex justify-between items-center border-b border-dark-700 pb-2 shrink-0">
-                             <h3 class="font-medium text-gray-300">Hasil Fitting AI</h3>
-                             <div class="flex items-center gap-3">
-                                 <button onclick="window.openZoomModal(document.getElementById('fashion-result-img').src)" class="text-emerald-400 hover:text-emerald-300 text-sm flex items-center gap-1 hidden" id="fashion-zoom-btn">
-                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                     Perbesar
-                                 </button>
-                                 <button onclick="window.downloadImg('fashion-result-img', 'Fashion-Result.png')" class="text-emerald-400 hover:text-emerald-300 text-sm flex items-center gap-1 hidden" id="fashion-download-btn">
-                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                     Unduh
-                                 </button>
-                             </div>
-                         </div>
-                        <div class="w-full flex-1 min-h-[400px] bg-dark-900 rounded-lg flex flex-col items-center justify-center overflow-hidden border border-dark-700 relative p-4">
-                            <img id="fashion-result-img" src="" class="hidden w-full h-full object-contain">
-                            <span id="fashion-result-text" class="text-sm text-gray-600">Menunggu generate...</span>
-                            
-                            <!-- Loader -->
-                            <div id="loader-fashion" class="hidden absolute inset-0 bg-dark-900/90 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-lg">
-                                <div class="w-12 h-12 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
-                                <p id="fashion-loader-msg" class="mt-4 text-emerald-400 text-sm font-medium animate-pulse text-center px-4">Menganalisis Pakaian...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <!-- Project 3 -->
+          <article class="project-card fade-up delay-2">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="560" height="40" rx="8" fill="#d4d4d4"/>
+                <rect x="120" y="180" width="180" height="180" rx="8" fill="#d4d4d4"/>
+                <rect x="320" y="180" width="360" height="80" rx="8" fill="#f5f5f5"/>
+                <rect x="340" y="200" width="160" height="16" rx="4" fill="#d4d4d4"/>
+                <rect x="340" y="230" width="200" height="12" rx="4" fill="#e5e5e5"/>
+                <rect x="320" y="280" width="360" height="180" rx="8" fill="#f5f5f5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">HR & Finance Dashboard — Preview</text>
+              </svg>
             </div>
-
-            <!-- TAB CONTENT: Admin / API -->
-            <div id="tab-admin" class="tab-content hidden flex-col gap-6">
-                
-                <!-- Input API Key Baru -->
-                <div class="bg-dark-800 border border-dark-700 rounded-xl p-5 shadow-lg">
-                    <h3 class="font-medium text-gray-200 mb-2 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4v-3.252a1 1 0 01.293-.707l8.194-8.193A6 6 0 0115 7h0z"></path></svg>
-                        Tambahkan API Key Lokal
-                    </h3>
-                    <p class="text-sm text-gray-400 mb-4">Masukkan Gemini API Key (diawali dengan AIza) untuk disimpan di memori lokal browser Anda.</p>
-                    <div class="flex gap-2">
-                        <input type="password" id="new-api-key" placeholder="Paste Gemini API Key Anda..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg p-2.5 text-sm text-gray-200 focus:outline-none focus:border-emerald-500 transition-colors">
-                        <button onclick="window.addApiKey()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            Simpan Key
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Stat Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-5 flex flex-col justify-between">
-                        <div class="text-sm text-gray-400">Total API Keys Aktif</div>
-                        <div class="text-2xl font-bold text-white mt-1"><span id="total-api-keys">0</span> <span class="text-xs font-normal text-emerald-500 ml-2">Sistem Ready</span></div>
-                    </div>
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-5 flex flex-col justify-between">
-                        <div class="text-sm text-gray-400">Estimasi Token Terpakai</div>
-                        <div class="text-2xl font-bold text-white mt-1">Sistem Aktif <span class="text-xs font-normal text-gray-500 ml-1">/ Otomatis</span></div>
-                        <div class="w-full bg-dark-900 h-1.5 rounded-full mt-3 overflow-hidden">
-                            <div class="bg-emerald-500 h-full w-[100%]"></div>
-                        </div>
-                    </div>
-                    <div class="bg-dark-800 border border-dark-700 rounded-xl p-5 flex flex-col justify-between">
-                        <div class="text-sm text-gray-400">Status Server Edge</div>
-                        <div class="text-lg font-bold text-emerald-400 mt-1 flex items-center gap-2">
-                            <span class="relative flex h-3 w-3">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                            </span>
-                            Resilient (Backoff ON)
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 1: API Key Environment Table -->
-                <div class="bg-dark-800 border border-dark-700 rounded-xl overflow-hidden">
-                    <div class="p-4 border-b border-dark-700 flex justify-between items-center bg-dark-900/50">
-                        <h3 class="font-medium text-gray-200">Environment Injection Key</h3>
-                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-medium">Bawaan Sistem</span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-400 bg-dark-900 uppercase">
-                                <tr>
-                                    <th class="px-6 py-3">Key Value</th>
-                                    <th class="px-6 py-3">Usage</th>
-                                    <th class="px-6 py-3">Status</th>
-                                    <th class="px-6 py-3 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="env-api-table-body">
-                                <!-- Data dimuat secara dinamis oleh JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Section 2: API Key Local Storage Table -->
-                <div class="bg-dark-800 border border-dark-700 rounded-xl overflow-hidden">
-                    <div class="p-4 border-b border-dark-700 flex justify-between items-center bg-dark-900/50">
-                        <h3 class="font-medium text-gray-200">Manajemen API Key Lokal</h3>
-                        <span class="text-xs bg-dark-700 px-2 py-1 rounded text-gray-400">Local Storage</span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-400 bg-dark-900 uppercase">
-                                <tr>
-                                    <th class="px-6 py-3">Key Value</th>
-                                    <th class="px-6 py-3">Usage</th>
-                                    <th class="px-6 py-3">Status</th>
-                                    <th class="px-6 py-3 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="local-api-table-body">
-                                <!-- Data dimuat secara dinamis oleh JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Looker Studio</span>
+                <span class="tag">Cloud SQL</span>
+              </div>
+              <h3 class="project-title">HRIS & Payroll Automation</h3>
+              <p class="project-desc">Sistem HR terintegrasi: absensi geofence, cuti/izin workflow approval, perhitungan payroll otomatis (BPJS, PPh21, THR), slip gaji digital, dan integrasi accounting.</p>
+              <div class="project-tags">
+                <span class="tag">Workflow Approval</span>
+                <span class="tag">Geofence</span>
+                <span class="tag">Email Automation</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Jasa & HR • 4 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
             </div>
+          </article>
 
+          <!-- Project 4 -->
+          <article class="project-card fade-up delay-3">
+            <div class="project-image loaded">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#f0f0f0"/>
+                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
+                <rect x="120" y="120" width="560" height="240" rx="8" fill="#f5f5f5"/>
+                <rect x="140" y="140" width="80" height="80" rx="8" fill="#d4d4d4"/>
+                <rect x="240" y="150" width="200" height="20" rx="4" fill="#d4d4d4"/>
+                <rect x="240" y="180" width="300" height="14" rx="4" fill="#e5e5e5"/>
+                <rect x="240" y="205" width="180" height="14" rx="4" fill="#e5e5e5"/>
+                <rect x="140" y="250" width="200" height="40" rx="8" fill="#171717"/>
+                <rect x="360" y="250" width="200" height="40" rx="8" fill="#e5e5e5"/>
+                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Retail Inventory POS — Mobile UI</text>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="tag">AppSheet</span>
+                <span class="tag">Barcode Scanner</span>
+                <span class="tag">Firebase</span>
+              </div>
+              <h3 class="project-title">Inventory & POS untuk Ritel Multi-cabang</h3>
+              <p class="project-desc">Aplikasi kasir mobile + manajemen stok terpusat: barcode scanning, transfer antar cabang, auto reorder point, laporan penjualan harian/bulanan, integrasi e-commerce.</p>
+              <div class="project-tags">
+                <span class="tag">Multi-location</span>
+                <span class="tag">Barcode/QR</span>
+                <span class="tag">Offline-first</span>
+              </div>
+              <div class="project-footer">
+                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Ritel • 3 bulan</span>
+                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+              </div>
+            </div>
+          </article>
         </div>
-    </main>
 
-    <!-- JS Logic -->
-    <script>
-        /* === TOAST & MODAL ZOOM NOTIFICATION SYSTEM === */
-        window.showToast = function(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            const bgColor = type === 'error' ? 'bg-red-600' : 'bg-emerald-600';
-            const icon = type === 'error' 
-                ? `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
-                : `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
-
-            toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg text-sm flex items-center gap-3 transform transition-all duration-300 translate-y-[-1rem] opacity-0 font-medium`;
-            toast.innerHTML = `${icon} <span>${message}</span>`;
-            
-            container.appendChild(toast);
-            
-            setTimeout(() => { toast.classList.remove('translate-y-[-1rem]', 'opacity-0'); }, 10);
-            setTimeout(() => {
-                toast.classList.add('translate-y-[-1rem]', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
-        };
-
-        window.openZoomModal = function(imgSrc) {
-            if(!imgSrc || imgSrc.includes('hidden')) return;
-            const modal = document.getElementById('zoom-modal');
-            const modalImg = document.getElementById('zoom-modal-img');
-            modalImg.src = imgSrc;
-            modal.classList.remove('hidden');
-            
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalImg.classList.remove('scale-95');
-                modalImg.classList.add('scale-100');
-            }, 10);
-        };
-
-        window.closeZoomModal = function() {
-            const modal = document.getElementById('zoom-modal');
-            const modalImg = document.getElementById('zoom-modal-img');
-            modal.classList.add('opacity-0');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modalImg.src = '';
-            }, 300);
-        };
-
-        // Custom Modal UI untuk menghapus API Key
-        let keyIndexToDelete = null;
-
-        window.openDeleteModal = function(index) {
-            keyIndexToDelete = index;
-            const modal = document.getElementById('delete-modal');
-            const content = document.getElementById('delete-modal-content');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }, 10);
-        };
-
-        window.closeDeleteModal = function() {
-            const modal = document.getElementById('delete-modal');
-            const content = document.getElementById('delete-modal-content');
-            modal.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                keyIndexToDelete = null;
-            }, 300);
-        };
-
-        window.confirmDeleteApiKey = function() {
-            if (keyIndexToDelete !== null) {
-                savedApiKeys.splice(keyIndexToDelete, 1);
-                localStorage.setItem('gemini_api_keys', JSON.stringify(savedApiKeys));
-                window.renderApiKeys();
-                window.showToast("API Key berhasil dihapus.", "success");
-                window.closeDeleteModal();
-            }
-        };
-
-        /* === CONFIGURATION & STATE (API KEY MANAGEMENT) === */
-        const apiKey = ""; 
-        const fallbackApiKey = "";
-        let savedApiKeys = JSON.parse(localStorage.getItem('gemini_api_keys') || '[]');
-        
-        document.addEventListener('DOMContentLoaded', () => { window.renderApiKeys(); });
-
-        window.renderApiKeys = function() {
-            const envTbody = document.getElementById('env-api-table-body');
-            const localTbody = document.getElementById('local-api-table-body');
-            
-            envTbody.innerHTML = '';
-            localTbody.innerHTML = '';
-            
-            let totalKeys = savedApiKeys.length;
-
-            if (typeof apiKey !== 'undefined' && apiKey !== "") {
-                totalKeys++;
-                const maskedEnvKey = apiKey.substring(0, 8) + '••••••••';
-                const envTr = document.createElement('tr');
-                envTr.className = 'border-b border-emerald-900/30 bg-emerald-900/10 hover:bg-emerald-900/20 transition-colors';
-                envTr.innerHTML = `
-                    <td class="px-6 py-4 font-mono text-emerald-300 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        Key_Gemini_Primary <span class="text-xs text-gray-500 ml-2">(${maskedEnvKey})</span>
-                    </td>
-                    <td class="px-6 py-4 text-gray-400"><span class="text-gray-200 font-medium">Auto</span> req</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-[10px] uppercase font-bold tracking-wider">Aktif</span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button disabled class="text-gray-600 cursor-not-allowed p-1.5 rounded" title="Environment Key tidak dapat dihapus">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        </button>
-                    </td>
-                `;
-                envTbody.appendChild(envTr);
-            } else {
-                envTbody.innerHTML = `<tr>
-                    <td class="px-6 py-4 font-mono text-emerald-300 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        Key_Gemini_Primary <span class="text-xs text-gray-500 ml-2">(Sistem Tertutup)</span>
-                    </td>
-                    <td class="px-6 py-4 text-gray-400"><span class="text-gray-200 font-medium">Auto</span> req</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-[10px] uppercase font-bold tracking-wider">Prioritas Utama</span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button disabled class="text-gray-600 cursor-not-allowed p-1.5 rounded" title="Environment Key tidak dapat dihapus">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        </button>
-                    </td>
-                </tr>`;
-            }
-
-            if (savedApiKeys.length === 0) {
-                localTbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500 italic">Belum ada API Key lokal yang ditambahkan. Silakan tambah pada form di atas.</td></tr>`;
-            } else {
-                savedApiKeys.forEach((k, index) => {
-                    const maskedKey = k.key.substring(0, 10) + '••••••••••••••••' + k.key.substring(k.key.length - 4);
-                    const tr = document.createElement('tr');
-                    tr.className = 'border-b border-dark-700 hover:bg-dark-800 transition-colors';
-                    tr.innerHTML = `
-                        <td class="px-6 py-4 font-mono text-gray-300 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4v-3.252a1 1 0 01.293-.707l8.194-8.193A6 6 0 0115 7h0z"></path></svg>
-                            ${maskedKey}
-                        </td>
-                        <td class="px-6 py-4 text-gray-400"><span class="text-gray-200 font-medium">${k.usage || 0}</span> req</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-[10px] uppercase font-bold tracking-wider">Aktif (Standby)</span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <button onclick="window.openDeleteModal(${index})" class="text-red-400 hover:text-red-300 p-1.5 rounded hover:bg-red-500/10 transition-colors" title="Hapus API Key">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </button>
-                        </td>
-                    `;
-                    localTbody.appendChild(tr);
-                });
-            }
-
-            document.getElementById('total-api-keys').innerText = totalKeys;
-        };
-
-        window.addApiKey = function() {
-            const input = document.getElementById('new-api-key');
-            const keyVal = input.value.trim();
-            
-            if (!keyVal) {
-                return window.showToast("Masukkan API Key terlebih dahulu.", "error");
-            }
-            if (!keyVal.startsWith('AIza')) {
-                return window.showToast("Format tidak valid! Gemini API Key harus diawali dengan 'AIza'.", "error");
-            }
-            if (savedApiKeys.find(k => k.key === keyVal)) {
-                return window.showToast("API Key ini sudah ada di dalam daftar.", "error");
-            }
-            
-            savedApiKeys.push({ key: keyVal, usage: 0, addedAt: new Date().toISOString() });
-            localStorage.setItem('gemini_api_keys', JSON.stringify(savedApiKeys));
-            
-            input.value = '';
-            window.renderApiKeys();
-            window.showToast("API Key berhasil ditambahkan!");
-        };
-
-        window.getApiKeyForModul1 = function() {
-            if (savedApiKeys.length > 0) {
-                const k = savedApiKeys.shift(); 
-                k.usage = (k.usage || 0) + 1; 
-                savedApiKeys.push(k);
-                localStorage.setItem('gemini_api_keys', JSON.stringify(savedApiKeys));
-                window.renderApiKeys(); 
-                return k.key;
-            }
-            return apiKey; 
-        };
-        
-        window.getAdvancedApiKey = function() {
-            if (savedApiKeys.length > 0) {
-                const k = savedApiKeys.shift(); 
-                k.usage = (k.usage || 0) + 1; 
-                savedApiKeys.push(k);
-                localStorage.setItem('gemini_api_keys', JSON.stringify(savedApiKeys));
-                window.renderApiKeys(); 
-                return k.key;
-            }
-            return typeof apiKey !== 'undefined' ? apiKey : ""; 
-        };
-        
-        /* === FILE HANDLING STATE & DEDICATED DROPZONES === */
-        
-        // Modul 1 Dedicated State
-        let m1Data = { active: false, isDoc: false, base64: null, mimeType: '', name: '', textContent: null };
-        // Modul 2 Shared Image State
-        let base64Image = null; 
-        let currentFile = null;
-        // Modul 3 Shared Images Array State
-        let m3Images = [];
-        
-        window.switchTab = function(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('flex', 'grid');
-            });
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('bg-emerald-500/10', 'text-emerald-400');
-                el.classList.add('text-gray-400');
-            });
-            
-            const activeTab = document.getElementById('tab-' + tabId);
-            if (activeTab) {
-                activeTab.classList.remove('hidden');
-                activeTab.classList.add('flex'); // Add flex to wrapper
-            }
-            
-            const activeNav = document.getElementById('nav-' + tabId);
-            if (activeNav) {
-                activeNav.classList.remove('text-gray-400');
-                activeNav.classList.add('bg-emerald-500/10', 'text-emerald-400');
-            }
-            
-            const titles = {
-                'modul1': 'Ekstraksi Konteks (Vision)',
-                'modul2': 'AI Stylist (Image-to-Image)',
-                'modul3': 'Studio Pose (Batch Generator)',
-                'modul4': 'Virtual Fitting Room',
-                'admin': 'Admin & Manajemen API Key'
-            };
-            const titleEl = document.getElementById('page-title');
-            if (titleEl) {
-                titleEl.innerText = titles[tabId] || '';
-            }
-        };
-
-        window.switchVFTab = function(room) {
-            const btnModel = document.getElementById('tab-btn-vf-model');
-            const btnFashion = document.getElementById('tab-btn-vf-fashion');
-            const contentModel = document.getElementById('vf-model-content');
-            const contentFashion = document.getElementById('vf-fashion-content');
-
-            if (room === 'model') {
-                btnModel.classList.add('border-emerald-500', 'text-emerald-400');
-                btnModel.classList.remove('border-transparent', 'text-gray-400');
-                btnFashion.classList.remove('border-emerald-500', 'text-emerald-400');
-                btnFashion.classList.add('border-transparent', 'text-gray-400');
-                contentModel.classList.remove('hidden');
-                contentModel.classList.add('grid');
-                contentFashion.classList.add('hidden');
-                contentFashion.classList.remove('grid');
-            } else {
-                btnFashion.classList.add('border-emerald-500', 'text-emerald-400');
-                btnFashion.classList.remove('border-transparent', 'text-gray-400');
-                btnModel.classList.remove('border-emerald-500', 'text-emerald-400');
-                btnModel.classList.add('border-transparent', 'text-gray-400');
-                contentFashion.classList.remove('hidden');
-                contentFashion.classList.add('grid');
-                contentModel.classList.add('hidden');
-                contentModel.classList.remove('grid');
-            }
-        };
-
-        // Global Paste interceptor
-        document.addEventListener('paste', (e) => {
-            if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
-            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-            for (let index in items) {
-                const item = items[index];
-                if (item.kind === 'file') {
-                    const blob = item.getAsFile();
-                    const isM1 = !document.getElementById('tab-modul1').classList.contains('hidden');
-                    const isM2 = !document.getElementById('tab-modul2').classList.contains('hidden');
-                    const isM3 = !document.getElementById('tab-modul3').classList.contains('hidden');
-                    const isM4 = !document.getElementById('tab-modul4').classList.contains('hidden');
-                    
-                    if (isM1) {
-                        window.handleM1File(blob);
-                    } else if (isM2) {
-                        window.handleM2M3File(blob);
-                    } else if (isM3) {
-                        window.handleM3Files([blob]);
-                    } else if (isM4) {
-                        const isFashionRoom = !document.getElementById('vf-fashion-content').classList.contains('hidden');
-                        if (isFashionRoom) {
-                            if(confirm("Paste gambar sebagai Pakaian (Fashion)?\n\n(Klik 'Cancel' jika ini adalah Logo)")) {
-                                window.handleFashionFile(blob);
-                                window.showToast("Gambar di-paste sebagai Pakaian.");
-                            } else {
-                                window.handleLogoFile(blob);
-                                window.showToast("Gambar di-paste sebagai Logo.");
-                            }
-                        } else {
-                            if(confirm("Paste gambar sebagai Foto Model Utama?\n\n(Klik 'Cancel' jika ini adalah gambar Produk Pakaian)")) {
-                                window.handleNyetakModel(blob);
-                                window.showToast("Gambar di-paste sebagai Foto Model Utama.");
-                            } else {
-                                window.handleNyetakProducts([blob]);
-                                window.showToast("Gambar di-paste sebagai Produk Pakaian.");
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-        });
-
-        window.handleM1File = function(file) {
-            if (!file) return;
-            if (file.size > 10 * 1024 * 1024) {
-                return window.showToast('Ukuran file maksimal 10MB.', 'error');
-            }
-            
-            m1Data.name = file.name;
-            m1Data.mimeType = file.type;
-            m1Data.isDoc = !file.type.startsWith('image/');
-            m1Data.active = true;
-
-            const emptyState = document.getElementById('m1-empty-state');
-            const hoverOverlay = document.getElementById('m1-hover-overlay');
-            const imgPreview = document.getElementById('m1-original-preview');
-            const docPreview = document.getElementById('m1-doc-preview');
-            const docName = document.getElementById('m1-doc-name');
-            const btnReset = document.getElementById('m1-reset-btn');
-
-            emptyState.classList.add('hidden');
-            hoverOverlay.classList.remove('hidden'); hoverOverlay.classList.add('flex');
-            btnReset.classList.remove('hidden');
-
-            if (m1Data.isDoc) {
-                imgPreview.classList.add('hidden');
-                docName.innerText = file.name;
-                docPreview.classList.remove('hidden'); docPreview.classList.add('flex');
-                
-                if (file.type === 'text/plain') {
-                    const reader = new FileReader();
-                    reader.onload = (e) => { m1Data.textContent = e.target.result; };
-                    reader.readAsText(file);
-                } else {
-                    const reader = new FileReader();
-                    reader.onload = (e) => { m1Data.base64 = e.target.result.split(',')[1]; };
-                    reader.readAsDataURL(file);
-                }
-                document.getElementById('m1-output-title').innerText = "Hasil Ekstraksi Dokumen";
-                window.showToast("Dokumen berhasil diunggah!");
-            } else {
-                docPreview.classList.add('hidden'); docPreview.classList.remove('flex');
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const result = e.target.result;
-                    m1Data.base64 = result.split(',')[1];
-                    imgPreview.src = result;
-                    imgPreview.classList.remove('hidden');
-                    window.showToast("Gambar referensi berhasil diperbarui!");
-                };
-                reader.readAsDataURL(file);
-                document.getElementById('m1-output-title').innerText = "Hasil Ekstraksi JSON";
-            }
-        };
-        // Handler M2 (AI Stylist Images Only)
-        window.handleM2M3File = function(file) {
-            if (!file || !file.type.startsWith('image/')) {
-                return window.showToast('Modul ini hanya mendukung file gambar (JPG/PNG/WEBP).', 'error');
-            }
-            if (file.size > 4 * 1024 * 1024) {
-                return window.showToast('Ukuran gambar maksimal 4MB.', 'error');
-            }
-            currentFile = file;
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const result = e.target.result;
-                base64Image = result.split(',')[1];
-                
-                // Update M2 Preview
-                ['m2'].forEach(prefix => {
-                    const img = document.getElementById(`${prefix}-original-preview`);
-                    const empty = document.getElementById(`${prefix}-empty-state`);
-                    const overlay = document.getElementById(`${prefix}-hover-overlay`);
-                    const btn = document.getElementById(`${prefix}-reset-btn`);
-                    if(img) { img.src = result; img.classList.remove('hidden'); }
-                    if(empty) empty.classList.add('hidden');
-                    if(overlay) { overlay.classList.remove('hidden'); overlay.classList.add('flex'); }
-                    if(btn) btn.classList.remove('hidden');
-                });
-                window.showToast("Gambar referensi berhasil diperbarui!");
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.resetM1File = function() {
-            m1Data = { active: false, isDoc: false, base64: null, mimeType: '', name: '', textContent: null };
-            document.getElementById('m1-file-input').value = "";
-            document.getElementById('m1-original-preview').classList.add('hidden');
-            document.getElementById('m1-original-preview').src = "";
-            document.getElementById('m1-doc-preview').classList.add('hidden');
-            document.getElementById('m1-doc-preview').classList.remove('flex');
-            document.getElementById('m1-empty-state').classList.remove('hidden');
-            document.getElementById('m1-hover-overlay').classList.add('hidden');
-            document.getElementById('m1-hover-overlay').classList.remove('flex');
-            document.getElementById('m1-reset-btn').classList.add('hidden');
-            document.getElementById('modul1-output').innerHTML = '<span class="text-gray-500 italic">Hasil ekstraksi atribut gambar atau resume dokumen akan muncul di sini...</span>';
-            document.getElementById('m1-download-btn').classList.add('hidden');
-            document.getElementById('m1-output-filename').innerText = "output.json";
-        };
-
-        window.resetM2M3File = function() {
-            currentFile = null;
-            base64Image = null;
-            ['m2'].forEach(prefix => {
-                const img = document.getElementById(`${prefix}-original-preview`);
-                const empty = document.getElementById(`${prefix}-empty-state`);
-                const overlay = document.getElementById(`${prefix}-hover-overlay`);
-                const btn = document.getElementById(`${prefix}-reset-btn`);
-                const inp = document.getElementById(`${prefix}-file-input`);
-                
-                if(img) { img.src = ""; img.classList.add('hidden'); }
-                if(empty) empty.classList.remove('hidden');
-                if(overlay) { overlay.classList.add('hidden'); overlay.classList.remove('flex'); }
-                if(btn) btn.classList.add('hidden');
-                if(inp) inp.value = "";
-            });
-            
-            // Bersihkan State Modul 3 (Multi Images)
-            m3Images = [];
-            window.renderM3Grid();
-            
-            const m2Result = document.getElementById('m2-result-img');
-            if (m2Result) { m2Result.classList.add('hidden'); m2Result.src = ''; }
-            const m2Text = document.getElementById('m2-result-text');
-            if (m2Text) m2Text.classList.remove('hidden');
-            const m2Zoom = document.getElementById('m2-zoom-btn');
-            if (m2Zoom) m2Zoom.classList.add('hidden');
-            const m2Dl = document.getElementById('m2-download-btn');
-            if (m2Dl) m2Dl.classList.add('hidden');
-            
-            const m3Grid = document.getElementById('m3-grid');
-            if (m3Grid) m3Grid.innerHTML = '<div class="col-span-full text-center py-20 text-gray-600 text-sm flex flex-col items-center justify-center h-full"><svg class="w-12 h-12 mb-3 text-dark-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Hasil batch pose akan tampil di grid ini</div>';
-        };
-
-        /* === API RESILIENCE === */
-        window.fetchWithBackoff = async function(url, options, maxRetries = 5) {
-            const delays = [1000, 2000, 4000, 8000, 16000];
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (response.ok) return await response.json();
-                    
-                    if (response.status === 429 || response.status === 503) {
-                        if (i === maxRetries - 1) throw new Error(`API Error (Rate Limit): ${response.status}`);
-                        await new Promise(res => setTimeout(res, delays[i]));
-                        continue;
-                    }
-                    
-                    const errData = await response.json();
-                    const errMsg = errData.error?.message || "Unknown API Error";
-
-                    if (response.status === 404 || response.status === 403) {
-                        throw new Error(`Akses Ditolak: API Key Pribadi Anda belum memiliki izin ke model eksperimental ini. (Pesan Google: ${errMsg})`);
-                    }
-                    throw new Error(errMsg);
-                } catch (error) {
-                    if (error.message.includes("Akses Ditolak")) throw error;
-                    if (i === maxRetries - 1) throw error;
-                    await new Promise(res => setTimeout(res, delays[i]));
-                }
-            }
-        };
-
-        /* === MODUL 1: VISION TO JSON / DOC RESUME === */
-        let m1LastOutput = "";
-        
-        window.runModul1 = async function() {
-            if (!m1Data.active) return window.showToast("Pilih file referensi terlebih dahulu.", "error");
-            
-            const currentApiKey = window.getApiKeyForModul1();
-            
-            const btn = document.getElementById('btn-modul1');
-            const loader = document.getElementById('loader-modul1');
-            const loaderText = document.getElementById('m1-loader-text');
-            const outputArea = document.getElementById('modul1-output');
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-            
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
-                let payload = {};
-
-                if (m1Data.isDoc) {
-                    loaderText.innerText = "Membaca dan merangkum dokumen...";
-                    const prompt = "Berikan resume/ringkasan yang panjang, komprehensif, dan terstruktur dengan rapi dari dokumen ini. Ekstrak poin-poin penting, informasi utama, dan kesimpulan secara detail.";
-                    
-                    if (m1Data.textContent) {
-                        payload = { contents: [{ parts: [{ text: prompt + "\n\nIsi Dokumen:\n" + m1Data.textContent }] }] };
-                    } else {
-                        payload = {
-                            contents: [{ parts: [ { text: prompt }, { inlineData: { mimeType: m1Data.mimeType, data: m1Data.base64 } } ] }]
-                        };
-                    }
-                } else {
-                    loaderText.innerText = "Menganalisis gambar & merender JSON...";
-                    const prompt = `Analisis gambar ini dengan sangat detail. Abaikan Etnis, Gaya/Warna Rambut, Kumis, dan Janggut. Gunakan frasa '(gambar referensi)' setelah menyebutkan subjek utama.`;
-                    payload = {
-                        contents: [{ parts: [ { text: prompt }, { inlineData: { mimeType: m1Data.mimeType, data: m1Data.base64 } } ] }],
-                        generationConfig: {
-                            responseMimeType: "application/json",
-                            responseSchema: {
-                                type: "OBJECT",
-                                properties: {
-                                    subjek_utama: { type: "STRING" }, ekspresi: { type: "STRING" }, pakaian: { type: "STRING" },
-                                    latar_belakang: { type: "STRING" }, deskripsi_naratif: { type: "STRING" }
-                                },
-                                required: ["subjek_utama", "ekspresi", "pakaian", "latar_belakang", "deskripsi_naratif"]
-                            }
-                        }
-                    };
-                }
-
-                const data = await window.fetchWithBackoff(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const outputText = data.candidates[0].content.parts[0].text;
-                m1LastOutput = outputText;
-                
-                document.getElementById('m1-download-btn').classList.remove('hidden');
-
-                if (m1Data.isDoc) {
-                    document.getElementById('m1-output-filename').innerText = "resume.txt";
-                    outputArea.innerHTML = `<div class="text-gray-200 font-sans leading-relaxed">${outputText.replace(/\n/g, '<br>')}</div>`;
-                    window.showToast("Ekstraksi Dokumen berhasil!");
-                } else {
-                    document.getElementById('m1-output-filename').innerText = "output.json";
-                    const jsonObj = JSON.parse(outputText);
-                    outputArea.innerHTML = window.syntaxHighlight(JSON.stringify(jsonObj, null, 2));
-                    window.showToast("Ekstraksi JSON berhasil!");
-                }
-
-            } catch (err) {
-                outputArea.innerHTML = `<span class="text-red-400">Error: ${err.message}</span>`;
-                window.showToast(`Gagal: ${err.message}`, "error");
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
-            }
-        };
-
-        window.downloadM1Result = function() {
-            if(!m1LastOutput) return;
-            const isJson = !m1Data.isDoc;
-            const blob = new Blob([m1LastOutput], { type: isJson ? 'application/json' : 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = isJson ? 'ekstraksi.json' : 'resume.txt';
-            a.click();
-            URL.revokeObjectURL(url);
-        };
-
-        window.syntaxHighlight = function(json) {
-            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                var cls = 'json-number';
-                if (/^"/.test(match)) {
-                    if (/:$/.test(match)) { cls = 'json-key'; } 
-                    else { cls = 'json-string'; }
-                } else if (/true|false/.test(match)) { cls = 'text-emerald-400'; } 
-                else if (/null/.test(match)) { cls = 'text-gray-500'; }
-                return '<span class="' + cls + '">' + match + '</span>';
-            });
-        };
-
-        window.copyJSON = function() {
-            const text = m1LastOutput;
-            if(text) {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    window.showToast("Teks berhasil disalin ke clipboard!");
-                } catch (err) {
-                    window.showToast("Gagal menyalin.", "error");
-                }
-                document.body.removeChild(textArea);
-            }
-        };
-
-        /* === MODUL 2: AI STYLIST === */
-        window.runModul2 = async function() {
-            if (!base64Image) return window.showToast("Pilih gambar referensi terlebih dahulu.", "error");
-            
-            const currentApiKey = apiKey;
-            
-            const promptInput = document.getElementById('m2-prompt').value;
-            const themeInput = document.getElementById('m2-theme').value;
-            
-            if (!promptInput && !themeInput) return window.showToast("Masukkan minimal prompt modifikasi atau pilih tema.", "error");
-            
-            const btn = document.getElementById('btn-modul2');
-            const loader = document.getElementById('loader-modul2');
-            const resultImg = document.getElementById('m2-result-img');
-            const resultText = document.getElementById('m2-result-text');
-            const zoomBtn = document.getElementById('m2-zoom-btn');
-            const dlBtn = document.getElementById('m2-download-btn');
-            const ratio = document.getElementById('m2-ratio').value;
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-            zoomBtn.classList.add('hidden');
-            dlBtn.classList.add('hidden');
-            
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${currentApiKey}`;
-                const sysInstruction = "Gunakan kepala/identitas input, pertahankan proporsi. Ubah elemen sesuai prompt dengan gaya fotorealistik.";
-                const themeAppend = themeInput ? ` ${themeInput}.` : "";
-                const finalPrompt = `${sysInstruction}\nPrompt: ${promptInput}${themeAppend}`;
-
-                const payload = {
-                    contents: [{
-                        parts: [
-                            { text: finalPrompt },
-                            { inlineData: { mimeType: currentFile.type, data: base64Image } }
-                        ]
-                    }],
-                    generationConfig: { 
-                        responseModalities: ["TEXT", "IMAGE"],
-                        imageConfig: { aspectRatio: ratio } 
-                    }
-                };
-
-                const data = await window.fetchWithBackoff(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const b64Result = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-                
-                if (b64Result) {
-                    resultImg.src = `data:image/jpeg;base64,${b64Result}`;
-                    resultImg.onload = () => {
-                        resultImg.classList.remove('hidden');
-                        resultText.classList.add('hidden');
-                        zoomBtn.classList.remove('hidden');
-                        dlBtn.classList.remove('hidden');
-                    };
-                    window.showToast("Gambar berhasil dimodifikasi!");
-                } else {
-                    throw new Error("Gambar gagal digenerate oleh AI.");
-                }
-            } catch (err) {
-                window.showToast(`Error Stylist: ${err.message}`, "error");
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
-            }
-        };
-
-        /* === MODUL 3: STUDIO POSE === */
-        window.runModul3 = async function() {
-            if (m3Images.length === 0) return window.showToast("Harap unggah minimal 1 gambar referensi.", "error");
-            
-            const currentApiKey = window.getAdvancedApiKey();
-            
-            const count = parseInt(document.getElementById('m3-count').value);
-            const angle = document.getElementById('m3-angle').value;
-            const theme = document.getElementById('m3-theme').value;
-            const promptInput = document.getElementById('m3-prompt').value;
-            const ratio = document.getElementById('m3-ratio').value;
-            
-            const btn = document.getElementById('btn-modul3');
-            const loader = document.getElementById('loader-modul3');
-            const grid = document.getElementById('m3-grid');
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-            grid.innerHTML = '';
-            
-            try {
-                for(let i=0; i<count; i++) {
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${currentApiKey}`;
-                    
-                    let themeAppend = theme ? ` dengan tema: ${theme}.` : "";
-                    let customAppend = promptInput ? ` Modifikasi tambahan: ${promptInput}.` : "";
-                    const prompt = `Ubah pose subjek utama menjadi: ${angle}. Pertahankan wajah dan identitas subjek utama. Jadikan pose terlihat sangat natural.${themeAppend}${customAppend} Modifikasi ringan pada variasi ke-${i+1} agar pose tidak identik 100%.`;
-
-                    let parts = [{ text: prompt }];
-                    m3Images.forEach(b64 => {
-                        parts.push({ inlineData: { mimeType: "image/jpeg", data: b64 } });
-                    });
-
-                    const payload = {
-                        contents: [{ parts: parts }],
-                        generationConfig: { 
-                            responseModalities: ["TEXT", "IMAGE"],
-                            imageConfig: { aspectRatio: ratio }
-                        }
-                    };
-
-                    const data = await window.fetchWithBackoff(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const b64Result = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-                    
-                    if (b64Result) {
-                        const imgBox = document.createElement('div');
-                        // Use w-full and h-auto to ensure images render perfectly within the flex grid space
-                        imgBox.className = 'aspect-[3/4] w-full max-h-full rounded-lg overflow-hidden border border-dark-700 bg-dark-900 relative group';
-                        imgBox.innerHTML = `
-                            <img src="data:image/jpeg;base64,${b64Result}" class="w-full h-full object-contain">
-                            <div class="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
-                                <button onclick="window.openZoomModal(this.parentElement.previousElementSibling.src)" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors w-32 justify-center">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg> Perbesar
-                                </button>
-                                <button onclick="window.downloadImgEl(this)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors w-32 justify-center">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Unduh
-                                </button>
-                            </div>
-                        `;
-                        grid.appendChild(imgBox);
-                    }
-                }
-                if(grid.innerHTML === '') throw new Error("Gagal generate batch.");
-                window.showToast("Batch pose selesai!");
-            } catch (err) {
-                window.showToast(`Error Studio Pose: ${err.message}`, "error");
-                grid.innerHTML = '<div class="col-span-full text-center py-20 text-red-400 h-full flex items-center justify-center">Gagal memproses pose.</div>';
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
-            }
-        };
-
-        window.downloadImg = function(imgId, filename) {
-            const img = document.getElementById(imgId);
-            if(!img.src || img.src.includes('hidden')) return;
-            const a = document.createElement('a');
-            a.href = img.src;
-            a.download = filename;
-            a.click();
-        };
-        
-        window.downloadImgEl = function(btn) {
-            const img = btn.parentElement.previousElementSibling; 
-            const a = document.createElement('a');
-            a.href = img.src;
-            a.download = 'Generative-Studio-' + Date.now() + '.png';
-            a.click();
-        };
-
-        /* === MODUL 4: VIRTUAL FITTING === */
-        let nyetakModelImage = null;
-        let nyetakProductImages = [];
-        let fashionImageB64 = null;
-        let logoImageB64 = null;
-
-        // Model Room Setup
-        const nyetakModelDropzone = document.getElementById('nyetak-model-dropzone');
-        const nyetakModelInput = document.getElementById('nyetak-model-input');
-        if(nyetakModelDropzone && nyetakModelInput) {
-            nyetakModelDropzone.addEventListener('click', () => nyetakModelInput.click());
-            nyetakModelInput.addEventListener('change', (e) => window.handleNyetakModel(e.target.files[0]));
-            nyetakModelDropzone.addEventListener('dragover', (e) => { e.preventDefault(); nyetakModelDropzone.classList.add('border-emerald-500'); });
-            nyetakModelDropzone.addEventListener('dragleave', () => { nyetakModelDropzone.classList.remove('border-emerald-500'); });
-            nyetakModelDropzone.addEventListener('drop', (e) => {
-                e.preventDefault(); nyetakModelDropzone.classList.remove('border-emerald-500');
-                if (e.dataTransfer.files.length) window.handleNyetakModel(e.dataTransfer.files[0]);
-            });
-        }
-
-        const nyetakProductAdd = document.getElementById('nyetak-product-add');
-        const nyetakProductInput = document.getElementById('nyetak-product-input');
-        if (nyetakProductAdd) nyetakProductAdd.addEventListener('click', () => nyetakProductInput.click());
-        if (nyetakProductInput) nyetakProductInput.addEventListener('change', (e) => window.handleNyetakProducts(e.target.files));
-
-        window.handleNyetakModel = function(file) {
-            if (!file || !file.type.startsWith('image/')) return window.showToast('Harap unggah gambar (JPG/PNG).', 'error');
-            if (file.size > 4 * 1024 * 1024) return window.showToast('Ukuran gambar maksimal 4MB.', 'error');
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const result = e.target.result;
-                nyetakModelImage = result.split(',')[1];
-                
-                document.getElementById('nyetak-model-preview').src = result;
-                document.getElementById('nyetak-model-preview').classList.remove('hidden');
-                document.getElementById('nyetak-model-placeholder').classList.add('hidden');
-                document.getElementById('nyetak-model-hover').classList.remove('hidden');
-                document.getElementById('nyetak-model-hover').classList.add('flex');
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.handleNyetakProducts = function(files) {
-            Array.from(files).forEach(file => {
-                if (nyetakProductImages.length >= 9) return;
-                if (!file || !file.type.startsWith('image/')) return;
-                if (file.size > 4 * 1024 * 1024) return;
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const b64 = e.target.result.split(',')[1];
-                    nyetakProductImages.push(b64);
-                    window.renderNyetakProductGrid();
-                };
-                reader.readAsDataURL(file);
-            });
-            document.getElementById('nyetak-product-input').value = "";
-        };
-
-        window.removeNyetakProduct = function(index) {
-            nyetakProductImages.splice(index, 1);
-            window.renderNyetakProductGrid();
-        };
-
-        window.renderNyetakProductGrid = function() {
-            const grid = document.getElementById('nyetak-product-grid');
-            const addButton = document.getElementById('nyetak-product-add');
-            grid.innerHTML = '';
-            
-            nyetakProductImages.forEach((b64, idx) => {
-                const div = document.createElement('div');
-                div.className = 'aspect-square bg-dark-800 border border-dark-700 rounded-md relative group overflow-hidden';
-                div.innerHTML = `
-                    <img src="data:image/jpeg;base64,${b64}" class="w-full h-full object-cover">
-                    <div class="absolute top-1 left-1 bg-dark-900/80 text-white text-[10px] px-1.5 py-0.5 rounded shadow">${idx + 1}</div>
-                    <button onclick="window.removeNyetakProduct(${idx})" class="absolute top-1 right-1 bg-red-500/90 hover:bg-red-500 text-white p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity shadow" title="Hapus Produk">
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                `;
-                grid.appendChild(div);
-            });
-            
-            if (nyetakProductImages.length < 9) {
-                grid.appendChild(addButton);
-            }
-            document.getElementById('nyetak-product-count').innerText = `${nyetakProductImages.length}/9`;
-        };
-
-        window.createCompositeImage = async function() {
-            if (nyetakProductImages.length === 0) return null;
-            return new Promise((resolve) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const tileSize = 256;
-                let cols = 1, rows = 1;
-                const len = nyetakProductImages.length;
-                
-                if (len > 4) { cols = 3; rows = Math.ceil(len / 3); }
-                else if (len > 1) { cols = 2; rows = Math.ceil(len / 2); }
-                
-                canvas.width = cols * tileSize;
-                canvas.height = rows * tileSize;
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                let loaded = 0;
-                nyetakProductImages.forEach((b64, idx) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const x = (idx % cols) * tileSize;
-                        const y = Math.floor(idx / cols) * tileSize;
-                        const scale = Math.max(tileSize / img.width, tileSize / img.height);
-                        const w = img.width * scale;
-                        const h = img.height * scale;
-                        ctx.drawImage(img, x + (tileSize - w)/2, y + (tileSize - h)/2, w, h);
-                        
-                        loaded++;
-                        if (loaded === len) resolve(canvas.toDataURL('image/jpeg').split(',')[1]);
-                    };
-                    img.src = `data:image/jpeg;base64,${b64}`;
-                });
-            });
-        };
-
-        window.runModul4 = async function() {
-            if (!nyetakModelImage) return window.showToast("Harap unggah Foto Model Anda di kotak sebelah kiri.", "error");
-            if (nyetakProductImages.length === 0) return window.showToast("Harap unggah minimal 1 Foto Produk Pakaian di kotak kanan.", "error");
-            
-            const currentApiKey = apiKey;
-            const ratio = document.getElementById('nyetak-ratio').value;
-            const count = parseInt(document.getElementById('nyetak-count').value);
-            
-            const btn = document.getElementById('btn-modul4');
-            const loader = document.getElementById('loader-modul4');
-            const msg = document.getElementById('nyetak-loader-msg');
-            const grid = document.getElementById('nyetak-result-grid');
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-            grid.innerHTML = '';
-            
-            try {
-                msg.innerText = "Menganalisis Foto (Lighting & Pose)...";
-                const analyzeUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
-                
-                let styleDesc = "pencahayaan natural, pose berdiri kasual";
-                try {
-                    const analyzeData = await window.fetchWithBackoff(analyzeUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: "Deskripsikan gaya foto ini (lighting, pose, background)." }, { inlineData: { mimeType: "image/jpeg", data: nyetakModelImage } }] }]
-                        })
-                    });
-                    if (analyzeData.candidates) styleDesc = analyzeData.candidates[0].content.parts[0].text;
-                } catch (e) { console.warn("Analysis API Timeout", e); }
-                
-                msg.innerText = "Memproses Pakaian...";
-                const compositeB64 = await window.createCompositeImage();
-                
-                msg.innerText = "Menjahit Digital (AI Rendering)...";
-                const genUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${currentApiKey}`;
-                
-                for(let i=0; i<count; i++) {
-                    const prompt = `Virtual fitting room. Gunakan kepala input, postur, pose, background dan tipe tubuh dari Model asli (gambar referensi 1). Gunakan dan tempelkan produk pakaian komposit (gambar referensi 2) untuk mengganti pakaian yang sedang dipakai oleh Model saat ini. Seluruh gambar pakaian pada komposit wajib digunakan secara proporsional. Pastikan proporsi dan anatomi tubuh model dipertahankan. Sesuaikan pencahayaan agar menyatu secara alami dan mengikuti gaya fotorealistis sesuai deskripsi berikut: ${styleDesc}. Berikan modifikasi ringan pada variasi ke-${i+1} agar pose terlihat natural.`;
-
-                    const genData = await window.fetchWithBackoff(genUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: prompt }, { inlineData: { mimeType: "image/jpeg", data: nyetakModelImage } }, { inlineData: { mimeType: "image/jpeg", data: compositeB64 } }] }],
-                            generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: ratio } }
-                        })
-                    });
-
-                    const b64Result = genData.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-                    
-                    if (b64Result) {
-                        const imgBox = document.createElement('div');
-                        imgBox.className = 'aspect-[3/4] w-full max-h-full rounded-lg overflow-hidden border border-dark-700 bg-dark-900 relative group';
-                        imgBox.innerHTML = `
-                            <img src="data:image/jpeg;base64,${b64Result}" class="w-full h-full object-contain">
-                            <div class="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
-                                <button onclick="window.openZoomModal(this.parentElement.previousElementSibling.src)" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors w-32 justify-center">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg> Perbesar
-                                </button>
-                                <button onclick="window.downloadImgEl(this)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium flex items-center gap-2 transition-colors w-32 justify-center">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> Unduh
-                                </button>
-                            </div>
-                        `;
-                        grid.appendChild(imgBox);
-                    }
-                }
-
-                if(grid.innerHTML === '') throw new Error("Gagal generate hasil fitting.");
-                window.showToast("Virtual Fitting Berhasil!");
-
-            } catch (err) {
-                window.showToast(`Error Fitting: ${err.message}`, "error");
-                grid.innerHTML = '<div class="col-span-full text-center py-20 text-red-400 h-full flex items-center justify-center">Sistem sibuk atau gambar ditolak. Coba lagi.</div>';
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
-            }
-        };
-
-        // Fashion Room Setup
-        const fashionMainDropzone = document.getElementById('fashion-main-dropzone');
-        const fashionMainInput = document.getElementById('fashion-main-input');
-        if(fashionMainDropzone && fashionMainInput) {
-            fashionMainDropzone.addEventListener('click', () => fashionMainInput.click());
-            fashionMainInput.addEventListener('change', (e) => window.handleFashionFile(e.target.files[0]));
-            fashionMainDropzone.addEventListener('dragover', (e) => { e.preventDefault(); fashionMainDropzone.classList.add('border-emerald-500'); });
-            fashionMainDropzone.addEventListener('dragleave', () => { fashionMainDropzone.classList.remove('border-emerald-500'); });
-            fashionMainDropzone.addEventListener('drop', (e) => {
-                e.preventDefault(); fashionMainDropzone.classList.remove('border-emerald-500');
-                if (e.dataTransfer.files.length) window.handleFashionFile(e.dataTransfer.files[0]);
-            });
-        }
-
-        const fashionLogoDropzone = document.getElementById('fashion-logo-dropzone');
-        const fashionLogoInput = document.getElementById('fashion-logo-input');
-        if(fashionLogoDropzone && fashionLogoInput) {
-            fashionLogoDropzone.addEventListener('click', () => fashionLogoInput.click());
-            fashionLogoInput.addEventListener('change', (e) => window.handleLogoFile(e.target.files[0]));
-            fashionLogoDropzone.addEventListener('dragover', (e) => { e.preventDefault(); fashionLogoDropzone.classList.add('border-emerald-500'); });
-            fashionLogoDropzone.addEventListener('dragleave', () => { fashionLogoDropzone.classList.remove('border-emerald-500'); });
-            fashionLogoDropzone.addEventListener('drop', (e) => {
-                e.preventDefault(); fashionLogoDropzone.classList.remove('border-emerald-500');
-                if (e.dataTransfer.files.length) window.handleLogoFile(e.dataTransfer.files[0]);
-            });
-        }
-
-        window.handleFashionFile = function(file) {
-            if (!file || !file.type.startsWith('image/')) return window.showToast('Harap unggah gambar (JPG/PNG).', 'error');
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                fashionImageB64 = e.target.result.split(',')[1];
-                document.getElementById('fashion-main-preview').src = e.target.result;
-                document.getElementById('fashion-main-preview').classList.remove('hidden');
-                document.getElementById('fashion-main-placeholder').classList.add('hidden');
-                document.getElementById('fashion-main-hover').classList.remove('hidden');
-                document.getElementById('fashion-main-hover').classList.add('flex');
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.handleLogoFile = function(file) {
-            if (!file || !file.type.startsWith('image/')) return window.showToast('Harap unggah gambar (JPG/PNG).', 'error');
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                logoImageB64 = e.target.result.split(',')[1];
-                document.getElementById('fashion-logo-preview').src = e.target.result;
-                document.getElementById('fashion-logo-preview').classList.remove('hidden');
-                document.getElementById('fashion-logo-placeholder').classList.add('hidden');
-                document.getElementById('fashion-logo-hover').classList.remove('hidden');
-                document.getElementById('fashion-logo-hover').classList.add('flex');
-                document.getElementById('fashion-logo-remove-btn').classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.removeFashionLogo = function() {
-            logoImageB64 = null;
-            document.getElementById('fashion-logo-input').value = "";
-            document.getElementById('fashion-logo-preview').src = "";
-            document.getElementById('fashion-logo-preview').classList.add('hidden');
-            document.getElementById('fashion-logo-placeholder').classList.remove('hidden');
-            document.getElementById('fashion-logo-hover').classList.add('hidden');
-            document.getElementById('fashion-logo-hover').classList.remove('flex');
-            document.getElementById('fashion-logo-remove-btn').classList.add('hidden');
-        };
-
-        window.runFashionRoom = async function() {
-            if (!fashionImageB64) return window.showToast("Harap unggah gambar Fashion / Pakaian.", "error");
-            
-            const currentApiKey = apiKey;
-            const ratio = document.getElementById('fashion-ratio').value;
-            const modelType = document.getElementById('fashion-model-type').value;
-            const modelChar = document.getElementById('fashion-model-char').value;
-            
-            const btn = document.getElementById('btn-fashion');
-            const loader = document.getElementById('loader-fashion');
-            const msg = document.getElementById('fashion-loader-msg');
-            const resultImg = document.getElementById('fashion-result-img');
-            const resultText = document.getElementById('fashion-result-text');
-            const zoomBtn = document.getElementById('fashion-zoom-btn');
-            const dlBtn = document.getElementById('fashion-download-btn');
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-            resultImg.classList.add('hidden');
-            resultText.classList.add('hidden');
-            zoomBtn.classList.add('hidden');
-            dlBtn.classList.add('hidden');
-            
-            try {
-                msg.innerText = "Men-generate Fashion (AI Rendering)...";
-                const genUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${currentApiKey}`;
-                
-                let subject = modelType === 'Manekin' ? 'patung manekin display tanpa wajah nyata' : (modelChar ? `seorang manusia model profesional ${modelChar}` : 'seorang manusia model profesional Laki-Laki Dewasa');
-                
-                let prompt = `Buatkan gambar fotorealistik berkualitas studio dari ${subject} yang sedang memakai pakaian dengan desain/warna persis seperti gambar referensi 1. Pastikan bentuk dan gaya pakaian dipertahankan.`;
-                if (logoImageB64) {
-                    prompt += ` Tempelkan desain/logo dari gambar referensi 2 secara proporsional dan presisi pada pakaian tersebut.`;
-                }
-                prompt += ` Latar belakang studio foto bersih dengan pencahayaan profesional, full color.`;
-
-                let parts = [{ text: prompt }, { inlineData: { mimeType: "image/jpeg", data: fashionImageB64 } }];
-                if (logoImageB64) {
-                    parts.push({ inlineData: { mimeType: "image/jpeg", data: logoImageB64 } });
-                }
-
-                const genData = await window.fetchWithBackoff(genUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: parts }],
-                        generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: ratio } }
-                    })
-                });
-
-                const b64Result = genData.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-                
-                if (b64Result) {
-                    resultImg.src = `data:image/jpeg;base64,${b64Result}`;
-                    resultImg.onload = () => {
-                        resultImg.classList.remove('hidden');
-                        zoomBtn.classList.remove('hidden');
-                        dlBtn.classList.remove('hidden');
-                    };
-                    window.showToast("Generate Fashion Berhasil!");
-                } else {
-                    throw new Error("Gagal generate hasil fashion.");
-                }
-
-            } catch (err) {
-                window.showToast(`Error Fashion: ${err.message}`, "error");
-                resultText.innerText = "Sistem sibuk atau gambar ditolak. Coba lagi.";
-                resultText.classList.remove('hidden');
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
-            }
-        };
-
-    </script>
-</body>
-</html>
+        <div style="text-align: center; margin-top: var(--space-10);">
+          <a href="#" class="btn btn-secondary">Lihat Semua Proyek →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section" style="background: var(--color-bg-alt);" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layanan Kami</span>
+          <h2 id="services-title">Dari Ide Hingga Aplikasi Berjalan</h2>
+          <p>Kami mendampingi tim Anda di setiap tahap — discovery, arsitektur data, development, deployment, hingga knowledge transfer.</p>
+        </div>
+
+        <div class="grid grid-4">
+          <article class="card service-card fade-up">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            </div>
+            <h3>Discovery & Arsitektur Data</h3>
+            <p>Analisis proses bisnis, pemodelan data Google Sheets/BigQuery, desain role & security, estimasi timeline & biaya.</p>
+            <div class="service-features">
+              <span class="service-feature">Process Mapping</span>
+              <span class="service-feature">Data Modeling</span>
+              <span class="service-feature">Security Design</span>
+              <span class="service-feature">Feasibility Study</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-1">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
+            </div>
+            <h3>Development AppSheet Custom</h3>
+            <p>Pembangunan aplikasi: UI/UX mobile & desktop, workflow automation, integrasi API eksternal, barcode/QR, geofence, offline mode.</p>
+            <div class="service-features">
+              <span class="service-feature">Custom UI/UX</span>
+              <span class="service-feature">Automation Bot</span>
+              <span class="service-feature">API Integration</span>
+              <span class="service-feature">Offline-first</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-2">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h3>Migrasi & Modernisasi</h3>
+            <p>Migrasi dari Access, Excel, FileMaker, VB6, legacy web ke AppSheet. Normalisasi data, clean up, dan parallel run hingga go-live.</p>
+            <div class="service-features">
+              <span class="service-feature">Data Migration</span>
+              <span class="service-feature">Legacy Cleanup</span>
+              <span class="service-feature">Parallel Run</span>
+              <span class="service-feature">Go-live Support</span>
+            </div>
+          </article>
+
+          <article class="card service-card fade-up delay-3">
+            <div class="service-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>Pelatihan & Knowledge Transfer</h3>
+            <p>Workshop hands-on untuk tim internal: AppSheet Editor, expression formulas, automation, best practice, serta dokumentasi lengkap (SOP & video).</p>
+            <div class="service-features">
+              <span class="service-feature">Hands-on Workshop</span>
+              <span class="service-feature">SOP Documentation</span>
+              <span class="service-feature">Video Tutorial</span>
+              <span class="service-feature">Ongoing Support</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section-sm" aria-labelledby="tech-title">
+      <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto var(--space-10);">
+          <span class="section-tag">Teknologi</span>
+          <h2 id="tech-title">Stack Modern, Enterprise-ready</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="tag" style="background: #4285F4; color: white;">Google AppSheet</span>
+          <span class="tag" style="background: #34A853; color: white;">Google Sheets</span>
+          <span class="tag" style="background: #EA4335; color: white;">BigQuery</span>
+          <span class="tag" style="background: #FBBC05; color: #171717;">Apps Script</span>
+          <span class="tag" style="background: #4285F4; color: white;">Looker Studio</span>
+          <span class="tag" style="background: #25D366; color: white;">WhatsApp API</span>
+          <span class="tag" style="background: #000000; color: white;">Google Maps</span>
+          <span class="tag" style="background: #FF6B6B; color: white;">Firebase</span>
+          <span class="tag" style="background: #6366F1; color: white;">Cloud Run</span>
+          <span class="tag" style="background: #14AE5C; color: white;">Cloud SQL</span>
+          <span class="tag" style="background: #F59E0B; color: white;">Vertex AI</span>
+          <span class="tag" style="background: #EC4899; color: white;">Looker</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Testimoni Klien</span>
+          <h2 id="testimonials-title">Apa Kata Klien Kami</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card testimonial-card fade-up">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"AppSheet Indonesia mengerti bisnis kami, bukan cuma teknis. Dari spreadsheet kacau jadi aplikasi produksi real-time dalam 8 minggu. Tim produksi sekarang bisa fokus kerja, bukan ngurus file."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">BS</div>
+              <div>
+                <div class="testimonial-name">Budi Santoso</div>
+                <div class="testimonial-role">VP Operations, PT Maju Jaya Manufacturing</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial-card fade-up delay-1">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"Kurir kami dulu catat manual di kertas. Sekarang scan barcode, foto bukti kirim, otomatis masuk sistem + notif WA ke customer. Error delivery turun 90%."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RW</div>
+              <div>
+                <div class="testimonial-name">Rudi Wijaya</div>
+                <div class="testimonial-role">COO, JNE Express Regional Jakarta</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial-card fade-up delay-2">
+            <div class="testimonial-stars" aria-label="5 bintang">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="testimonial-text">"Payroll yang dulu 3 hari kerja, sekarang 30 menit. Slip gaji digital, perhitungan BPJS/PPh21 otomatis, audit trail lengkap. HR team kami nangis senang pertama kali jalanin."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SM</div>
+              <div>
+                <div class="testimonial-name">Siti Maryam</div>
+                <div class="testimonial-role">HR Director, PT Sinar Abadi Group</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / CTA -->
+    <section id="about" class="section" style="background: var(--color-bg-alt);" aria-labelledby="about-title">
+      <div class="container">
+        <div class="grid grid-2" style="align-items: center; gap: var(--space-16);">
+          <div>
+            <span class="section-tag">Tentang Kami</span>
+            <h2 id="about-title">AppSheet Indonesia: Mitra Transformasi Digital Anda</h2>
+            <p style="margin-bottom: var(--space-6);">Kami adalah tim certified AppSheet developers & Google Cloud partners yang fokus membangun solusi no-code/low-code untuk enterprise Indonesia. Berpengalaman 5+ tahun, 150+ aplikasi, 40+ klien dari startup hingga BUMN.</p>
+            <p style="margin-bottom: var(--space-6);">Berbeda dengan agency umum: kami tidak hanya 'ngoding'. Kami mendesain arsitektur data yang scalable, mengajarkan tim internal Anda (knowledge transfer), dan menjamin aplikasi bisa di-maintain tanpa vendor lock-in.</p>
+            <div class="flex gap-4 flex-wrap">
+              <a href="#contact" class="btn btn-primary">Mulai Diskusi Proyek</a>
+              <a href="#" class="btn btn-secondary">Unduh Company Profile</a>
+            </div>
+          </div>
+          <div class="card" style="background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-card-bg) 100%); border-color: var(--color-accent);">
+            <div style="padding: var(--space-6);">
+              <h3 style="margin-bottom: var(--space-6); color: var(--color-accent);">Mengapa AppSheet Indonesia?</h3>
+              <ul style="display: grid; gap: var(--space-4); list-style: none;">
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Certified AppSheet Developer & Google Cloud Partner</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Full-stack: AppSheet + Apps Script + BigQuery + Looker</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Knowledge transfer wajib — tim Anda jadi mandiri</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Support pasca-go-live 3 bulan (SLA response < 4 jam)</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Harga transparan: fixed price per modul, no hidden cost</span>
+                </li>
+                <li class="flex gap-3">
+                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
+                  <span>Pengalaman industri: Manufaktur, Logistik, Ritel, Keuangan, HR</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="cta-section" aria-labelledby="contact-title">
+      <div class="container">
+        <span class="section-tag" style="color: rgba(255,255,255,0.6);">Mulai Proyek</span>
+        <h2 id="contact-title">Siap Mengotomatisasi Bisnis Anda?</h2>
+        <p>Ceritakan tantangan Anda — kami akan balas dalam 24 jam dengan estimasi timeline, biaya, & arsitektur solusi awal. Gratis konsultasi 30 menit.</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="https://wa.me/6281234567890?text=Halo%20AppSheet%20Indonesia%2C%20saya%20ingin%20konsultasi%20tentang%20proyek%20AppSheet" class="btn btn-primary" style="background: #25D366; border-color: #25D366;" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
+            Chat via WhatsApp
+          </a>
+          <a href="mailto:hello@appsheetindonesia.com" class="btn btn-secondary" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.
