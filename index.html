@@ -8,29 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* Brand colors from logo */
+      --color-primary: #4A90D9;        /* Cornflower blue from logo */
+      --color-primary-dark: #357ABD;   /* Darker shade */
+      --color-primary-light: #7AB8F0;  /* Lighter shade */
+      --color-accent: #E03E3E;         /* Red from ribbon */
+      --color-accent-hover: #C03030;   /* Darker red */
+      
+      /* Neutral colors */
       --color-bg: #ffffff;
-      --color-bg-alt: #fafafa;
-      --color-text: #171717;
-      --color-text-muted: #525252;
-      --color-text-subtle: #a3a3a3;
-      --color-accent: #000000;
-      --color-accent-hover: #171717;
-      --color-border: #e5e5e5;
-      --color-border-hover: #d4d4d4;
-      --color-card-bg: #ffffff;
-      --color-badge-bg: #f5f5f5;
-      --color-badge-text: #171717;
-      --shadow-sm: rgba(0,0,0,0.04) 0px 1px 2px;
-      --shadow-md: rgba(0,0,0,0.06) 0px 4px 8px -2px, rgba(0,0,0,0.03) 0px 2px 4px -2px;
-      --shadow-lg: rgba(0,0,0,0.08) 0px 12px 24px -8px, rgba(0,0,0,0.04) 0px 8px 16px -8px;
-      --shadow-xl: rgba(0,0,0,0.1) 0px 20px 40px -12px, rgba(0,0,0,0.05) 0px 12px 24px -12px;
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --radius-xl: 16px;
-      --radius-pill: 9999px;
-      --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --color-bg-alt: #F8FAFC;
+      --color-bg-card: #ffffff;
+      --color-text: #1A1A2E;
+      --color-text-muted: #64748B;
+      --color-text-subtle: #94A3B8;
+      --color-border: #E2E8F0;
+      --color-border-hover: #CBD5E1;
+      
+      /* Shadows with primary tint */
+      --shadow-sm: rgba(74, 144, 217, 0.08) 0px 1px 2px;
+      --shadow-md: rgba(74, 144, 217, 0.1) 0px 4px 8px -2px, rgba(74, 144, 217, 0.05) 0px 2px 4px -2px;
+      --shadow-lg: rgba(74, 144, 217, 0.12) 0px 12px 24px -8px, rgba(74, 144, 217, 0.06) 0px 8px 16px -8px;
+      --shadow-xl: rgba(74, 144, 217, 0.15) 0px 20px 40px -12px, rgba(74, 144, 217, 0.08) 0px 12px 24px -12px;
+      
+      /* Typography */
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'Geist Mono', 'Fira Code', monospace;
+      
+      /* Spacing */
       --space-1: 4px;
       --space-2: 8px;
       --space-3: 12px;
@@ -43,252 +48,92 @@
       --space-16: 64px;
       --space-20: 80px;
       --space-24: 96px;
-      --container-max: 1200px;
-      --header-height: 72px;
-      --transition-fast: 120ms ease;
-      --transition-base: 200ms ease;
-      --transition-slow: 300ms ease;
+      
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-2xl: 24px;
+      --radius-pill: 9999px;
+      
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-base: 250ms ease;
+      --transition-slow: 350ms ease;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --color-bg: #0a0a0a;
-        --color-bg-alt: #111111;
-        --color-text: #fafafa;
-        --color-text-muted: #a3a3a3;
-        --color-text-subtle: #737373;
-        --color-accent: #ffffff;
-        --color-accent-hover: #e5e5e5;
-        --color-border: #262626;
-        --color-border-hover: #404040;
-        --color-card-bg: #111111;
-        --color-badge-bg: #1a1a1a;
-        --color-badge-text: #fafafa;
-        --shadow-sm: rgba(0,0,0,0.3) 0px 1px 2px;
-        --shadow-md: rgba(0,0,0,0.4) 0px 4px 8px -2px, rgba(0,0,0,0.2) 0px 2px 4px -2px;
-        --shadow-lg: rgba(0,0,0,0.5) 0px 12px 24px -8px, rgba(0,0,0,0.25) 0px 8px 16px -8px;
-        --shadow-xl: rgba(0,0,0,0.6) 0px 20px 40px -12px, rgba(0,0,0,0.3) 0px 12px 24px -12px;
+        --color-bg: #0F172A;
+        --color-bg-alt: #1E293B;
+        --color-bg-card: #1E293B;
+        --color-text: #F1F5F9;
+        --color-text-muted: #94A3B8;
+        --color-text-subtle: #64748B;
+        --color-border: #334155;
+        --color-border-hover: #475569;
+        --shadow-sm: rgba(74, 144, 217, 0.15) 0px 1px 2px;
+        --shadow-md: rgba(74, 144, 217, 0.2) 0px 4px 8px -2px, rgba(74, 144, 217, 0.1) 0px 2px 4px -2px;
+        --shadow-lg: rgba(74, 144, 217, 0.25) 0px 12px 24px -8px, rgba(74, 144, 217, 0.1) 0px 8px 16px -8px;
+        --shadow-xl: rgba(74, 144, 217, 0.3) 0px 20px 40px -12px, rgba(74, 144, 217, 0.15) 0px 12px 24px -12px;
       }
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body {
-      font-family: var(--font-sans);
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-    }
-
-    h1, h2, h3, h4 { font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
-    h1 { font-size: clamp(36px, 5vw, 56px); }
-    h2 { font-size: clamp(28px, 4vw, 40px); }
-    h3 { font-size: clamp(20px, 2.5vw, 24px); }
-    h4 { font-size: clamp(16px, 2vw, 18px); }
-    p { color: var(--color-text-muted); font-size: 16px; line-height: 1.7; }
-    .text-sm { font-size: 14px; }
-    .text-xs { font-size: 12px; }
-    .text-lg { font-size: 18px; }
-    .font-mono { font-family: var(--font-mono); }
-    .font-light { font-weight: 300; }
-    .font-medium { font-weight: 500; }
-    .font-semibold { font-weight: 600; }
-
-    a { color: inherit; text-decoration: none; transition: color var(--transition-fast); }
-    a:hover { color: var(--color-accent); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-2);
-      padding: var(--space-3) var(--space-5);
-      font-size: 14px;
-      font-weight: 500;
-      font-family: var(--font-sans);
-      border-radius: var(--radius-md);
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--color-accent);
-      color: var(--color-bg);
-      border-color: var(--color-accent);
-    }
-    .btn-primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary {
-      background: transparent;
-      color: var(--color-text);
-      border-color: var(--color-border);
-    }
-    .btn-secondary:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--color-text-muted);
-      border-color: transparent;
-      padding: var(--space-2) var(--space-3);
-    }
-    .btn-ghost:hover { color: var(--color-text); background: var(--color-bg-alt); }
-
-    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
-    .section { padding: var(--space-20) 0; }
-    .section-sm { padding: var(--space-12) 0; }
-
-    .grid { display: grid; gap: var(--space-6); }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
-    @media (max-width: 1024px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+    
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6); }
+    
+    /* Layout utilities */
     .flex { display: flex; }
-    .flex-col { flex-direction: column; }
-    .items-center { align-items: center; }
     .justify-between { justify-content: space-between; }
-    .justify-center { justify-content: center; }
+    .items-center { align-items: center; }
     .gap-2 { gap: var(--space-2); }
     .gap-3 { gap: var(--space-3); }
     .gap-4 { gap: var(--space-4); }
     .gap-6 { gap: var(--space-6); }
     .gap-8 { gap: var(--space-8); }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: var(--header-height);
-      background: rgba(var(--color-bg-rgb, 255,255,255), 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
-    }
-    @media (prefers-color-scheme: dark) {
-      header { background: rgba(var(--color-bg-rgb, 10,10,10), 0.85); }
-    }
-    .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
-    .logo { display: flex; align-items: center; gap: var(--space-2); font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
-    .logo-mark { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--color-accent); display: flex; align-items: center; justify-content: center; color: var(--color-bg); font-weight: 700; font-size: 14px; }
-    .nav { display: flex; align-items: center; gap: var(--space-6); }
-    .nav-link { font-size: 14px; font-weight: 500; color: var(--color-text-muted); padding: var(--space-2) 0; position: relative; }
-    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-accent); transition: width var(--transition-base); }
-    .nav-link:hover { color: var(--color-text); }
-    .nav-link:hover::after { width: 100%; }
-    .nav-link.active { color: var(--color-text); }
-    .nav-link.active::after { width: 100%; }
-    .mobile-menu-btn { display: none; padding: var(--space-2); }
-
-    @media (max-width: 768px) {
-      .nav { position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border); flex-direction: column; padding: var(--space-6); gap: var(--space-4); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all var(--transition-base); }
-      .nav.open { transform: translateY(0); opacity: 1; visibility: visible; }
-      .mobile-menu-btn { display: flex; }
-    }
-
-    .hero { padding: var(--space-24) 0 var(--space-20); }
-    .hero-content { max-width: 800px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; margin-bottom: var(--space-6); }
-    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-    .hero h1 { margin-bottom: var(--space-6); }
-    .hero p { font-size: clamp(18px, 2.5vw, 22px); color: var(--color-text-muted); margin-bottom: var(--space-8); max-width: 600px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
-
-    .stats-bar { padding: var(--space-10) 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-20); }
-    .stat { text-align: center; padding: 0 var(--space-4); }
-    .stat-value { font-size: clamp(32px, 5vw, 48px); font-weight: 600; letter-spacing: -0.03em; color: var(--color-text); line-height: 1.1; }
-    .stat-label { font-size: 14px; color: var(--color-text-muted); margin-top: var(--space-2); font-weight: 500; }
-
-    .section-header { margin-bottom: var(--space-12); }
-    .section-tag { display: inline-block; font-size: 13px; font-weight: 500; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3); }
-    .section-header h2 { margin-bottom: var(--space-3); }
-    .section-header p { max-width: 600px; }
-
-    .card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: var(--space-6);
-      transition: all var(--transition-base);
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      border-color: var(--color-border-hover);
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-    .card-icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); margin-bottom: var(--space-4); transition: all var(--transition-fast); }
-    .card:hover .card-icon { background: var(--color-accent); color: var(--color-bg); }
-    .card h3 { margin-bottom: var(--space-2); }
-    .card p { flex: 1; margin-bottom: var(--space-4); }
-    .card-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
-    .tag { font-size: 12px; font-weight: 500; padding: var(--space-1) var(--space-3); background: var(--color-badge-bg); color: var(--color-badge-text); border-radius: var(--radius-pill); font-family: var(--font-mono); }
-
-    .project-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      transition: all var(--transition-base);
-    }
-    .project-card:hover { border-color: var(--color-border-hover); box-shadow: var(--shadow-xl); transform: translateY(-4px); }
-    .project-image { aspect-ratio: 16/10; background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%); position: relative; overflow: hidden; }
-    .project-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--transition-slow); }
-    .project-image.loaded img { opacity: 1; }
-    .project-content { padding: var(--space-6); }
-    .project-meta { display: flex; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
-    .project-title { font-size: 20px; font-weight: 600; margin-bottom: var(--space-2); }
-    .project-desc { color: var(--color-text-muted); margin-bottom: var(--space-4); line-height: 1.7; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
-    .project-footer { display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
-    .project-link { font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: var(--space-2); }
-    .project-link svg { transition: transform var(--transition-fast); }
-    .project-link:hover svg { transform: translateX(4px); }
-
-    .service-card { text-align: center; padding: var(--space-8); }
-    .service-icon { width: 64px; height: 64px; margin: 0 auto var(--space-5); border-radius: var(--radius-xl); background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; color: var(--color-accent); transition: all var(--transition-base); }
-    .service-card:hover .service-icon { background: var(--color-accent); color: var(--color-bg); transform: scale(1.05); }
-    .service-card h3 { margin-bottom: var(--space-3); }
-    .service-card p { margin-bottom: var(--space-5); }
-    .service-features { display: flex; flex-direction: column; gap: var(--space-2); text-align: left; }
-    .service-feature { display: flex; align-items: center; gap: var(--space-2); font-size: 14px; color: var(--color-text-muted); }
-    .service-feature::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; }
-
-    .testimonial-card { text-align: left; }
-    .testimonial-stars { display: flex; gap: 2px; margin-bottom: var(--space-4); color: #fbbf24; }
-    .testimonial-text { font-size: 18px; line-height: 1.7; color: var(--color-text); margin-bottom: var(--space-6); font-weight: 400; }
-    .testimonial-author { display: flex; align-items: center; gap: var(--space-3); }
-    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--color-border) 0%, var(--color-bg-alt) 100%); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-text-muted); font-size: 16px; }
-    .testimonial-name { font-weight: 600; }
-    .testimonial-role { font-size: 14px; color: var(--color-text-muted); }
-
-    .cta-section { background: var(--color-accent); color: var(--color-bg); padding: var(--space-20) 0; text-align: center; }
-    .cta-section h2 { color: inherit; margin-bottom: var(--space-4); }
-    .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto var(--space-8); }
-    .cta-section .btn-primary { background: var(--color-bg); color: var(--color-accent); }
-    .cta-section .btn-primary:hover { background: var(--color-bg-alt); }
-    .cta-section .btn-secondary { border-color: rgba(255,255,255,0.3); color: var(--color-bg); }
-    .cta-section .btn-secondary:hover { border-color: var(--color-bg); background: rgba(255,255,255,0.1); }
-
-    footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-16) 0 var(--space-8); }
-    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-10); margin-bottom: var(--space-12); }
-    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
-    .footer-brand p { color: var(--color-text-muted); margin-top: var(--space-4); max-width: 300px; }
-    .footer-social { display: flex; gap: var(--space-3); margin-top: var(--space-6); }
-    .footer-social a { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-card-bg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); transition: all var(--transition-fast); }
-    .footer-social a:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-bg); }
-    .footer-title { font-weight: 600; margin-bottom: var(--space-4); font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-subtle); }
-    .footer-links { display: flex; flex-direction: column; gap: var(--space-3); }
-    .footer-links a { font-size: 14px; color: var(--color-text-muted); transition: color var(--transition-fast); }
-    .footer-links a:hover { color: var(--color-accent); }
-    .footer-bottom { padding-top: var(--space-8); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); }
-    .footer-bottom p { font-size: 14px; color: var(--color-text-subtle); margin: 0; }
-
+    .gap-10 { gap: var(--space-10); }
+    
+    .grid { display: grid; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    
+    @media (max-width: 1024px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+    
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-3) var(--space-6); font-size: 14px; font-weight: 600; border-radius: var(--radius-md); transition: all var(--transition-fast); white-space: nowrap; }
+    .btn-primary { background: var(--color-primary); color: white; border: 2px solid var(--color-primary); }
+    .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); }
+    .btn-secondary:hover { background: var(--color-primary); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-ghost { background: transparent; color: var(--color-text); border: 2px solid transparent; }
+    .btn-ghost:hover { background: var(--color-bg-alt); color: var(--color-primary); }
+    .btn-accent { background: var(--color-accent); color: white; border: 2px solid var(--color-accent); }
+    .btn-accent:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+    
+    /* Section */
+    .section { padding: var(--space-20) 0; }
+    .section-header { text-align: center; margin-bottom: var(--space-16); }
+    .section-tag { display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-primary); background: rgba(74, 144, 217, 0.1); padding: var(--space-1) var(--space-4); border-radius: var(--radius-pill); margin-bottom: var(--space-4); }
+    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: var(--space-4); }
+    .section-desc { font-size: 18px; color: var(--color-text-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    
+    /* Tags */
+    .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); font-family: var(--font-mono); }
+    .tag-primary { background: rgba(74, 144, 217, 0.1); color: var(--color-primary); }
+    .tag-accent { background: rgba(224, 62, 62, 0.1); color: var(--color-accent); }
+    
+    /* Animations */
     .fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     .delay-1 { animation-delay: 100ms; }
@@ -297,17 +142,142 @@
     .delay-4 { animation-delay: 400ms; }
     .delay-5 { animation-delay: 500ms; }
     .delay-6 { animation-delay: 600ms; }
-
+    
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
     }
-
-    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: var(--radius-sm); }
-
+    
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: var(--radius-sm); }
+    
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); }
+    @media (prefers-color-scheme: dark) { header { background: rgba(15, 23, 42, 0.9); } }
+    
+    .header-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: var(--space-3); font-weight: 700; font-size: 20px; color: var(--color-text); transition: color var(--transition-fast); }
+    .logo:hover { color: var(--color-primary); }
+    .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-sm); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-main { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .logo-sub { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+    
+    .nav { display: flex; align-items: center; gap: var(--space-8); }
+    .nav-link { font-size: 14px; font-weight: 500; color: var(--color-text-muted); padding: var(--space-2) 0; position: relative; transition: color var(--transition-fast); }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); border-radius: 1px; transition: width var(--transition-base); }
+    .nav-link:hover { color: var(--color-primary); }
+    .nav-link:hover::after { width: 100%; }
+    
+    .mobile-menu-btn { display: none; }
+    
+    @media (max-width: 768px) {
+      .nav { position: fixed; top: 72px; left: 0; right: 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border); padding: var(--space-6); flex-direction: column; gap: var(--space-4); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all var(--transition-base); }
+      .nav.open { transform: translateY(0); opacity: 1; visibility: visible; }
+      .mobile-menu-btn { display: flex; }
+    }
+
+    /* Hero */
+    .hero { position: relative; padding: var(--space-24) 0 var(--space-20); overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; max-width: 800px; background: radial-gradient(ellipse at center, rgba(74, 144, 217, 0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-content { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: var(--space-2); font-size: 13px; font-weight: 600; color: var(--color-primary); background: rgba(74, 144, 217, 0.1); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); margin-bottom: var(--space-6); border: 1px solid rgba(74, 144, 217, 0.2); }
+    .hero-title { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: var(--space-6); color: var(--color-text); }
+    .hero-title span { color: var(--color-primary); }
+    .hero-desc { font-size: clamp(16px, 2.5vw, 20px); color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-8); max-width: 640px; margin-left: auto; margin-right: auto; }
+    .hero-actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+
+    /* Stats Bar */
+    .stats-bar { padding: var(--space-12) 0; background: var(--color-bg-alt); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    .stats-grid { display: flex; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
+    .stat { text-align: center; flex: 1; min-width: 160px; padding: var(--space-4); }
+    .stat-value { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; color: var(--color-primary); line-height: 1; margin-bottom: var(--space-2); }
+    .stat-label { font-size: 13px; font-weight: 500; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Projects */
+    .project-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition-base); }
+    .project-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-xl); transform: translateY(-4px); }
+    .project-image { aspect-ratio: 16/10; background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%); position: relative; overflow: hidden; }
+    .project-image svg { width: 100%; height: 100%; object-fit: cover; }
+    .project-content { padding: var(--space-6); }
+    .project-meta { display: flex; gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: wrap; }
+    .project-title { font-size: 20px; font-weight: 700; margin-bottom: var(--space-2); letter-spacing: -0.01em; }
+    .project-desc { color: var(--color-text-muted); margin-bottom: var(--space-4); line-height: 1.7; font-size: 15px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+    .project-link { font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: var(--space-2); color: var(--color-primary); }
+    .project-link svg { transition: transform var(--transition-fast); }
+    .project-link:hover svg { transform: translateX(4px); }
+
+    /* Services */
+    .service-card { text-align: center; padding: var(--space-8) var(--space-6); background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); transition: all var(--transition-base); }
+    .service-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .service-icon { width: 64px; height: 64px; margin: 0 auto var(--space-5); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(74, 144, 217, 0.1) 0%, rgba(74, 144, 217, 0.05) 100%); display: flex; align-items: center; justify-content: center; color: var(--color-primary); transition: all var(--transition-base); }
+    .service-card:hover .service-icon { background: var(--color-primary); color: white; transform: scale(1.05); }
+    .service-card h3 { font-size: 18px; font-weight: 700; margin-bottom: var(--space-3); }
+    .service-card p { color: var(--color-text-muted); margin-bottom: var(--space-5); line-height: 1.7; font-size: 14px; }
+    .service-features { display: flex; flex-direction: column; gap: var(--space-2); text-align: left; }
+    .service-feature { display: flex; align-items: center; gap: var(--space-2); font-size: 13px; color: var(--color-text-muted); }
+    .service-feature::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; }
+
+    /* Tech Stack */
+    .tech-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); }
+    .tech-item { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; color: var(--color-text-muted); transition: all var(--transition-fast); font-family: var(--font-mono); }
+    .tech-item:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(74, 144, 217, 0.05); transform: translateY(-1px); }
+
+    /* Testimonials */
+    .testimonial-card { text-align: left; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); transition: all var(--transition-base); }
+    .testimonial-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-lg); }
+    .testimonial-stars { display: flex; gap: 2px; margin-bottom: var(--space-4); color: var(--color-accent); }
+    .testimonial-text { font-size: 16px; line-height: 1.7; color: var(--color-text); margin-bottom: var(--space-6); font-weight: 400; }
+    .testimonial-author { display: flex; align-items: center; gap: var(--space-3); }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; }
+    .testimonial-name { font-weight: 600; }
+    .testimonial-role { font-size: 13px; color: var(--color-text-muted); }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: var(--space-24) 0; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%; background: radial-gradient(ellipse, rgba(224, 62, 62, 0.15) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: var(--space-4); }
+    .cta-section p { color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto var(--space-8); font-size: 18px; line-height: 1.7; }
+    .cta-actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+    .cta-section .btn-primary { background: white; color: var(--color-primary); border-color: white; }
+    .cta-section .btn-primary:hover { background: var(--color-bg-alt); }
+    .cta-section .btn-secondary { border-color: rgba(255,255,255,0.4); color: white; }
+    .cta-section .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* Footer */
+    footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-20) 0 var(--space-10); }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-10); margin-bottom: var(--space-12); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand .logo { margin-bottom: var(--space-4); }
+    .footer-brand p { color: var(--color-text-muted); font-size: 14px; line-height: 1.7; max-width: 300px; }
+    .footer-social { display: flex; gap: var(--space-3); margin-top: var(--space-6); }
+    .footer-social a { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-bg-card); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); transition: all var(--transition-fast); }
+    .footer-social a:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-bg); }
+    .footer-title { font-weight: 600; margin-bottom: var(--space-4); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-subtle); }
+    .footer-links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer-links a { font-size: 14px; color: var(--color-text-muted); transition: color var(--transition-fast); }
+    .footer-links a:hover { color: var(--color-primary); }
+    .footer-bottom { padding-top: var(--space-8); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); }
+    .footer-bottom p { font-size: 13px; color: var(--color-text-subtle); margin: 0; }
+    .footer-legal { display: flex; gap: var(--space-6); }
+    .footer-legal a { font-size: 12px; color: var(--color-text-subtle); }
+    .footer-legal a:hover { color: var(--color-primary); }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .hero-actions, .cta-actions { flex-direction: column; align-items: center; }
+      .hero-actions .btn, .cta-actions .btn { width: 100%; max-width: 280px; }
+      .stats-grid { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
@@ -315,8 +285,11 @@
   <header>
     <div class="container header-inner">
       <a href="#" class="logo" aria-label="AppSheet Indonesia Home">
-        <span class="logo-mark">AI</span>
-        AppSheet Indonesia
+        <img src="logo.jpg" alt="AppSheet Indonesia Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-main">AppSheet</span>
+          <span class="logo-sub">Indonesia</span>
+        </div>
       </a>
       <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
         <a href="#projects" class="nav-link">Proyek</a>
@@ -336,7 +309,7 @@
       <div class="container">
         <div class="hero-content">
           <span class="hero-badge fade-up">Mitra Resmi Google Cloud & AppSheet</span>
-          <h1 id="hero-title" class="fade-up delay-1">Membangun Aplikasi Bisnis Tanpa Kode,<br>Dengan Kecepatan Enterprise</h1>
+          <h1 id="hero-title" class="fade-up delay-1">Membangun Aplikasi Bisnis <span>Tanpa Kode</span>,<br>Dengan Kecepatan <span>Enterprise</span></h1>
           <p class="fade-up delay-2">AppSheet Indonesia membantu perusahaan mengotomatisasi proses, menggantikan spreadsheet yang rawan error, dan meluncurkan aplikasi custom dalam hitungan hari — bukan bulan.</p>
           <div class="hero-actions fade-up delay-3">
             <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
@@ -349,7 +322,7 @@
     <!-- Stats Bar -->
     <section class="stats-bar" aria-label="Statistik AppSheet Indonesia">
       <div class="container">
-        <div class="flex justify-between gap-6">
+        <div class="stats-grid">
           <div class="stat fade-up">
             <div class="stat-value">150+</div>
             <div class="stat-label">Aplikasi Dibangun</div>
@@ -375,41 +348,44 @@
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Portfolio Terpilih</span>
-          <h2 id="projects-title">Proyek-Proyek Nyata, Dampak Nyata</h2>
-          <p>Beberapa solusi yang kami bangun untuk klien dari berbagai industri — manufaktur, logistik, keuangan, hingga ritel.</p>
+          <h2 id="projects-title" class="section-title">Proyek-Proyek Nyata, <span style="color: var(--color-primary);">Dampak Nyata</span></h2>
+          <p class="section-desc">Beberapa solusi yang kami bangun untuk klien dari berbagai industri — manufaktur, logistik, keuangan, hingga ritel.</p>
         </div>
 
         <div class="grid grid-2">
           <!-- Project 1 -->
           <article class="project-card fade-up">
             <div class="project-image loaded">
-              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="object-fit: cover;">
-                <rect width="800" height="500" fill="#f0f0f0"/>
-                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
-                <rect x="120" y="120" width="200" height="32" rx="4" fill="#d4d4d4"/>
-                <rect x="120" y="170" width="560" height="16" rx="4" fill="#d4d4d4"/>
-                <rect x="120" y="200" width="560" height="16" rx="4" fill="#e5e5e5"/>
-                <rect x="120" y="230" width="180" height="16" rx="4" fill="#e5e5e5"/>
-                <rect x="120" y="350" width="160" height="40" rx="8" fill="#171717"/>
-                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Dashboard Manufaktur — Preview UI</text>
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="500" fill="#EFF6FF"/>
+                <rect x="80" y="80" width="640" height="340" rx="12" fill="#DBEAFE"/>
+                <rect x="100" y="100" width="200" height="36" rx="6" fill="#93C5FD"/>
+                <rect x="100" y="155" width="600" height="18" rx="4" fill="#BFDBFE"/>
+                <rect x="100" y="190" width="600" height="18" rx="4" fill="#DBEAFE"/>
+                <rect x="100" y="225" width="200" height="18" rx="4" fill="#DBEAFE"/>
+                <rect x="100" y="300" width="180" height="44" rx="10" fill="#4A90D9"/>
+                <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="16" fill="#64748B">Dashboard Manufaktur — Preview UI</text>
+                <g transform="translate(620, 100)">
+                  <path d="M0 20 L24 12 L0 4 L4 12 Z" fill="#E03E3E" opacity="0.9"/>
+                  <path d="M4 12 L24 12" stroke="#E03E3E" stroke-width="2" stroke-linecap="round"/>
+                </g>
               </svg>
             </div>
             <div class="project-content">
               <div class="project-meta">
-                <span class="tag">AppSheet</span>
-                <span class="tag">Google Sheets</span>
-                <span class="tag">BigQuery</span>
+                <span class="tag tag-primary">AppSheet</span>
+                <span class="tag tag-primary">Google Sheets</span>
+                <span class="tag tag-primary">BigQuery</span>
               </div>
-              <h3 class="project-title">Sistem Manajemen Produksi Real-time</h3>
-              <p class="project-desc">Aplikasi lengkap untuk pabrik manufaktur: tracking work order, monitoring mesin OEE, manajemen inventory bahan baku, dan dashboard KPI real-time untuk manajemen.</p>
+              <h3 class="project-title">Sistem Manajemen Produksi</h3>
+              <p class="project-desc">Aplikasi end-to-end untuk pabrik manufaktur: jadwal produksi, tracking material, quality control, dan laporan real-time ke manajemen. Menggantikan 15+ spreadsheet.</p>
               <div class="project-tags">
-                <span class="tag">Real-time Sync</span>
-                <span class="tag">Role-based Access</span>
-                <span class="tag">Offline Mode</span>
+                <span class="tag tag-accent">Automation</span>
+                <span class="tag tag-accent">Real-time Sync</span>
               </div>
               <div class="project-footer">
-                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Manufaktur • 3 bulan</span>
-                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+                <span>Manufaktur • 6 bulan</span>
+                <a href="#" class="project-link">Lihat Detail <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -418,35 +394,34 @@
           <article class="project-card fade-up delay-1">
             <div class="project-image loaded">
               <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="800" height="500" fill="#f0f0f0"/>
-                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
-                <rect x="120" y="120" width="120" height="120" rx="12" fill="#d4d4d4"/>
-                <rect x="260" y="140" width="200" height="24" rx="4" fill="#d4d4d4"/>
-                <rect x="260" y="180" width="300" height="16" rx="4" fill="#e5e5e5"/>
-                <rect x="260" y="210" width="300" height="16" rx="4" fill="#e5e5e5"/>
-                <rect x="120" y="260" width="440" height="120" rx="8" fill="#f5f5f5"/>
-                <rect x="140" y="280" width="100" height="16" rx="4" fill="#d4d4d4"/>
-                <rect x="140" y="310" width="200" height="12" rx="4" fill="#e5e5e5"/>
-                <rect x="140" y="335" width="150" height="12" rx="4" fill="#e5e5e5"/>
-                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Logistics Tracking — Mobile View</text>
+                <rect width="800" height="500" fill="#FEF2F2"/>
+                <rect x="80" y="80" width="640" height="340" rx="12" fill="#FECACA"/>
+                <rect x="100" y="100" width="300" height="180" rx="6" fill="#F87171" opacity="0.3"/>
+                <rect x="430" y="100" width="270" height="80" rx="6" fill="#EF4444" opacity="0.3"/>
+                <rect x="430" y="200" width="270" height="80" rx="6" fill="#EF4444" opacity="0.3"/>
+                <rect x="430" y="300" width="270" height="80" rx="6" fill="#EF4444" opacity="0.3"/>
+                <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="16" fill="#64748B">Logistics Tracking — Mobile Preview</text>
+                <g transform="translate(620, 100)">
+                  <path d="M0  L24 12 L0 4 L4 12 Z" fill="#E03E3E" opacity="0.9"/>
+                  <path d="M4 12 L24 12" stroke="#E03E3E" stroke-width="2" stroke-linecap="round"/>
+                </g>
               </svg>
             </div>
             <div class="project-content">
               <div class="project-meta">
-                <span class="tag">AppSheet</span>
-                <span class="tag">Google Maps API</span>
-                <span class="tag">Apps Script</span>
+                <span class="tag tag-primary">AppSheet</span>
+                <span class="tag tag-primary">Maps API</span>
+                <span class="tag tag-primary">WhatsApp API</span>
               </div>
-              <h3 class="project-title">Aplikasi Logistik & Tracking Kiriman</h3>
-              <p class="project-desc">Solusi end-to-end untuk ekspedisi: booking order, assign kurir, route optimization dengan Google Maps, proof of delivery (foto + tanda tangan), dan notifikasi WhatsApp otomatis.</p>
+              <h3 class="project-title">Tracking Logistik & Armada</h3>
+              <p class="project-desc">Sistem tracking pengiriman real-time dengan integrasi Google Maps, notifikasi WhatsApp otomatis, dan dashboard armada untuk tim operasional & customer service.</p>
               <div class="project-tags">
-                <span class="tag">GPS Tracking</span>
-                <span class="tag">WhatsApp API</span>
-                <span class="tag">PWA</span>
+                <span class="tag tag-accent">Geolocation</span>
+                <span class="tag tag-accent">Notifications</span>
               </div>
               <div class="project-footer">
-                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Logistik • 2 bulan</span>
-                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+                <span>Logistik • 4 bulan</span>
+                <a href="#" class="project-link">Lihat Detail <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -455,33 +430,33 @@
           <article class="project-card fade-up delay-2">
             <div class="project-image loaded">
               <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="800" height="500" fill="#f0f0f0"/>
-                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
-                <rect x="120" y="120" width="560" height="40" rx="8" fill="#d4d4d4"/>
-                <rect x="120" y="180" width="180" height="180" rx="8" fill="#d4d4d4"/>
-                <rect x="320" y="180" width="360" height="80" rx="8" fill="#f5f5f5"/>
-                <rect x="340" y="200" width="160" height="16" rx="4" fill="#d4d4d4"/>
-                <rect x="340" y="230" width="200" height="12" rx="4" fill="#e5e5e5"/>
-                <rect x="320" y="280" width="360" height="180" rx="8" fill="#f5f5f5"/>
-                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">HR & Finance Dashboard — Preview</text>
+                <rect width="800" height="500" fill="#F0FDF4"/>
+                <rect x="80" y="80" width="640" height="340" rx="12" fill="#BBF7D0"/>
+                <rect x="100" y="100" width="560" height="120" rx="6" fill="#86EFAC" opacity="0.4"/>
+                <rect x="100" y="240" width="260" height="160" rx="6" fill="#4ADE80" opacity="0.3"/>
+                <rect x="380" y="240" width="280" height="160" rx="6" fill="#22C55E" opacity="0.3"/>
+                <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="16" fill="#64748B">HRIS & Payroll — Dashboard</text>
+                <g transform="translate(620, 100)">
+                  <path d="M0  L24 12 L0 4 L4 12 Z" fill="#E03E3E" opacity="0.9"/>
+                  <path d="M4 12 L24 12" stroke="#E03E3E" stroke-width="2" stroke-linecap="round"/>
+                </g>
               </svg>
             </div>
             <div class="project-content">
               <div class="project-meta">
-                <span class="tag">AppSheet</span>
-                <span class="tag">Looker Studio</span>
-                <span class="tag">Cloud SQL</span>
+                <span class="tag tag-primary">AppSheet</span>
+                <span class="tag tag-primary">Apps Script</span>
+                <span class="tag tag-primary">Cloud SQL</span>
               </div>
-              <h3 class="project-title">HRIS & Payroll Automation</h3>
-              <p class="project-desc">Sistem HR terintegrasi: absensi geofence, cuti/izin workflow approval, perhitungan payroll otomatis (BPJS, PPh21, THR), slip gaji digital, dan integrasi accounting.</p>
+              <h3 class="project-title">HRIS & Payroll System</h3>
+              <p class="project-desc">Sistem SDM terintegrasi: absensi, cuti, evaluasi performa, payroll otomatis BPJS & PPh21, dan self-service portal karyawan. Compliant dengan regulasi Kemenaker.</p>
               <div class="project-tags">
-                <span class="tag">Workflow Approval</span>
-                <span class="tag">Geofence</span>
-                <span class="tag">Email Automation</span>
+                <span class="tag tag-accent">Compliance</span>
+                <span class="tag tag-accent">Integration</span>
               </div>
               <div class="project-footer">
-                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Jasa & HR • 4 bulan</span>
-                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+                <span>Corporate • 8 bulan</span>
+                <a href="#" class="project-link">Lihat Detail <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
@@ -490,108 +465,104 @@
           <article class="project-card fade-up delay-3">
             <div class="project-image loaded">
               <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="800" height="500" fill="#f0f0f0"/>
-                <rect x="100" y="100" width="600" height="300" rx="8" fill="#e5e5e5"/>
-                <rect x="120" y="120" width="560" height="240" rx="8" fill="#f5f5f5"/>
-                <rect x="140" y="140" width="80" height="80" rx="8" fill="#d4d4d4"/>
-                <rect x="240" y="150" width="200" height="20" rx="4" fill="#d4d4d4"/>
-                <rect x="240" y="180" width="300" height="14" rx="4" fill="#e5e5e5"/>
-                <rect x="240" y="205" width="180" height="14" rx="4" fill="#e5e5e5"/>
-                <rect x="140" y="250" width="200" height="40" rx="8" fill="#171717"/>
-                <rect x="360" y="250" width="200" height="40" rx="8" fill="#e5e5e5"/>
-                <text x="400" y="420" text-anchor="middle" font-family="system-ui" font-size="14" fill="#999">Retail Inventory POS — Mobile UI</text>
+                <rect width="800" height="500" fill="#FAF5FF"/>
+                <rect x="80" y="80" width="640" height="340" rx="12" fill="#E9D5FF"/>
+                <rect x="100" y="100" width="180" height="260" rx="6" fill="#C084FC" opacity="0.3"/>
+                <rect x="300" y="100" width="200" height="120" rx="6" fill="#A855F7" opacity="0.3"/>
+                <rect x="300" y="240" width="200" height="120" rx="6" fill="#9333EA" opacity="0.3"/>
+                <rect x="520" y="100" width="180" height="260" rx="6" fill="#D8B4FE" opacity="0.3"/>
+                <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="16" fill="#64748B">Inventory Ritel Multi-Cabang</text>
+                <g transform="translate(620, 100)">
+                  <path d="M0  L24 12 L0 4 L4 12 Z" fill="#E03E3E" opacity="0.9"/>
+                  <path d="M4 12 L24 12" stroke="#E03E3E" stroke-width="2" stroke-linecap="round"/>
+                </g>
               </svg>
             </div>
             <div class="project-content">
               <div class="project-meta">
-                <span class="tag">AppSheet</span>
-                <span class="tag">Barcode Scanner</span>
-                <span class="tag">Firebase</span>
+                <span class="tag tag-primary">AppSheet</span>
+                <span class="tag tag-primary">Looker Studio</span>
+                <span class="tag tag-primary">Firebase</span>
               </div>
-              <h3 class="project-title">Inventory & POS untuk Ritel Multi-cabang</h3>
-              <p class="project-desc">Aplikasi kasir mobile + manajemen stok terpusat: barcode scanning, transfer antar cabang, auto reorder point, laporan penjualan harian/bulanan, integrasi e-commerce.</p>
+              <h3 class="project-title">Inventory Ritel Multi-Cabang</h3>
+              <p class="project-desc">Manajemen stok terpusat untuk 25+ outlet: transfer antar cabang, reorder point otomatis, analisis penjualan per SKU, dan dashboard eksekutif di Looker Studio.</p>
               <div class="project-tags">
-                <span class="tag">Multi-location</span>
-                <span class="tag">Barcode/QR</span>
-                <span class="tag">Offline-first</span>
+                <span class="tag tag-accent">Multi-location</span>
+                <span class="tag tag-accent">Analytics</span>
               </div>
               <div class="project-footer">
-                <span class="text-sm text-xs" style="color: var(--color-text-muted);">Ritel • 3 bulan</span>
-                <a href="#" class="project-link font-mono text-xs">Lihat Case Study →</a>
+                <span>Ritel • 5 bulan</span>
+                <a href="#" class="project-link">Lihat Detail <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
               </div>
             </div>
           </article>
-        </div>
-
-        <div style="text-align: center; margin-top: var(--space-10);">
-          <a href="#" class="btn btn-secondary">Lihat Semua Proyek →</a>
         </div>
       </div>
     </section>
 
     <!-- Services -->
-    <section id="services" class="section" style="background: var(--color-bg-alt);" aria-labelledby="services-title">
+    <section id="services" class="section" aria-labelledby="services-title">
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Layanan Kami</span>
-          <h2 id="services-title">Dari Ide Hingga Aplikasi Berjalan</h2>
-          <p>Kami mendampingi tim Anda di setiap tahap — discovery, arsitektur data, development, deployment, hingga knowledge transfer.</p>
+          <h2 id="services-title" class="section-title">Solusi <span style="color: var(--color-primary);">End-to-End</span> untuk Transformasi Digital</h2>
+          <p class="section-desc">Dari ide hingga production — kami menemani perjalanan digitalisasi perusahaan Anda dengan pendekatan yang terstruktur dan scalable.</p>
         </div>
 
         <div class="grid grid-4">
-          <article class="card service-card fade-up">
+          <article class="service-card fade-up">
             <div class="service-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
             </div>
-            <h3>Discovery & Arsitektur Data</h3>
-            <p>Analisis proses bisnis, pemodelan data Google Sheets/BigQuery, desain role & security, estimasi timeline & biaya.</p>
+            <h3>Discovery & Arsitektur</h3>
+            <p>Analisis kebutuhan, desain arsitektur data, pemilihan stack teknologi, dan roadmap implementasi.</p>
             <div class="service-features">
-              <span class="service-feature">Process Mapping</span>
-              <span class="service-feature">Data Modeling</span>
-              <span class="service-feature">Security Design</span>
-              <span class="service-feature">Feasibility Study</span>
+              <span class="service-feature">Workshop kebutuhan bisnis</span>
+              <span class="service-feature">Data modeling & ERD</span>
+              <span class="service-feature">Teknologi stack recommendation</span>
+              <span class="service-feature">ROI & timeline estimation</span>
             </div>
           </article>
 
-          <article class="card service-card fade-up delay-1">
+          <article class="service-card fade-up delay-1">
             <div class="service-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
             </div>
-            <h3>Development AppSheet Custom</h3>
-            <p>Pembangunan aplikasi: UI/UX mobile & desktop, workflow automation, integrasi API eksternal, barcode/QR, geofence, offline mode.</p>
+            <h3>Development Custom</h3>
+            <p>Pengembangan aplikasi AppSheet full-cycle: UI/UX, business logic, integrasi API, security, dan deployment.</p>
             <div class="service-features">
-              <span class="service-feature">Custom UI/UX</span>
-              <span class="service-feature">Automation Bot</span>
-              <span class="service-feature">API Integration</span>
-              <span class="service-feature">Offline-first</span>
+              <span class="service-feature">AppSheet Pro development</span>
+              <span class="service-feature">Custom scripts (Apps Script)</span>
+              <span class="service-feature">External API integration</span>
+              <span class="service-feature">Role-based access control</span>
             </div>
           </article>
 
-          <article class="card service-card fade-up delay-2">
+          <article class="service-card fade-up delay-2">
             <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M19 12H5"></path><path d="M21 12a9 9 0 0 0-9-9"></path><path d="M3 12a9 9 0 0 1 9-9"></path></svg>
             </div>
             <h3>Migrasi & Modernisasi</h3>
-            <p>Migrasi dari Access, Excel, FileMaker, VB6, legacy web ke AppSheet. Normalisasi data, clean up, dan parallel run hingga go-live.</p>
+            <p>Migrasi dari legacy system (Access, Excel, VB6, legacy web) ke AppSheet dengan zero-downtime strategy.</p>
             <div class="service-features">
-              <span class="service-feature">Data Migration</span>
-              <span class="service-feature">Legacy Cleanup</span>
-              <span class="service-feature">Parallel Run</span>
-              <span class="service-feature">Go-live Support</span>
+              <span class="service-feature">Legacy data migration</span>
+              <span class="service-feature">Business logic rewrite</span>
+              <span class="service-feature">Parallel run & validation</span>
+              <span class="service-feature">User training & adoption</span>
             </div>
           </article>
 
-          <article class="card service-card fade-up delay-3">
+          <article class="service-card fade-up delay-3">
             <div class="service-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </div>
-            <h3>Pelatihan & Knowledge Transfer</h3>
-            <p>Workshop hands-on untuk tim internal: AppSheet Editor, expression formulas, automation, best practice, serta dokumentasi lengkap (SOP & video).</p>
+            <h3>Pelatihan & Workshop</h3>
+            <p>Kapasitasi tim internal: AppSheet fundamentals, advanced patterns, best practices, dan governance.</p>
             <div class="service-features">
-              <span class="service-feature">Hands-on Workshop</span>
-              <span class="service-feature">SOP Documentation</span>
-              <span class="service-feature">Video Tutorial</span>
-              <span class="service-feature">Ongoing Support</span>
+              <span class="service-feature">AppSheet Fundamentals (2 hari)</span>
+              <span class="service-feature">Advanced Automation (1 hari)</span>
+              <span class="service-feature">Governance & Security</span>
+              <span class="service-feature">Custom curriculum</span>
             </div>
           </article>
         </div>
@@ -599,25 +570,24 @@
     </section>
 
     <!-- Tech Stack -->
-    <section class="section-sm" aria-labelledby="tech-title">
+    <section class="section" style="background: var(--color-bg-alt);" aria-labelledby="tech-title">
       <div class="container">
-        <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto var(--space-10);">
+        <div class="section-header">
           <span class="section-tag">Teknologi</span>
-          <h2 id="tech-title">Stack Modern, Enterprise-ready</h2>
+          <h2 id="tech-title" class="section-title">Stack Teknologi <span style="color: var(--color-primary);">Modern & Scalable</span></h2>
+          <p class="section-desc">Menggabungkan kekuatan Google Workspace ecosystem dengan cloud infrastructure yang handal.</p>
         </div>
-        <div class="flex flex-wrap justify-center gap-3">
-          <span class="tag" style="background: #4285F4; color: white;">Google AppSheet</span>
-          <span class="tag" style="background: #34A853; color: white;">Google Sheets</span>
-          <span class="tag" style="background: #EA4335; color: white;">BigQuery</span>
-          <span class="tag" style="background: #FBBC05; color: #171717;">Apps Script</span>
-          <span class="tag" style="background: #4285F4; color: white;">Looker Studio</span>
-          <span class="tag" style="background: #25D366; color: white;">WhatsApp API</span>
-          <span class="tag" style="background: #000000; color: white;">Google Maps</span>
-          <span class="tag" style="background: #FF6B6B; color: white;">Firebase</span>
-          <span class="tag" style="background: #6366F1; color: white;">Cloud Run</span>
-          <span class="tag" style="background: #14AE5C; color: white;">Cloud SQL</span>
-          <span class="tag" style="background: #F59E0B; color: white;">Vertex AI</span>
-          <span class="tag" style="background: #EC4899; color: white;">Looker</span>
+        <div class="tech-grid">
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>AppSheet</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Google Sheets</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Apps Script</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>BigQuery</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Looker Studio</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Maps API</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>WhatsApp API</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Cloud Run</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Cloud SQL</span>
+          <span class="tech-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Vertex AI</span>
         </div>
       </div>
     </section>
@@ -626,61 +596,44 @@
     <section class="section" aria-labelledby="testimonials-title">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">Testimoni Klien</span>
-          <h2 id="testimonials-title">Apa Kata Klien Kami</h2>
+          <span class="section-tag">Klien Kami</span>
+          <h2 id="testimonials-title" class="section-title">Kepercayaan <span style="color: var(--color-primary);">Para Pemimpin Industri</span></h2>
+          <p class="section-desc">Kami bangga menjadi mitra teknologi untuk perusahaan-perusahaan terkemuka di Indonesia.</p>
         </div>
 
         <div class="grid grid-3">
-          <article class="card testimonial-card fade-up">
-            <div class="testimonial-stars" aria-label="5 bintang">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="testimonial-text">"AppSheet Indonesia mengerti bisnis kami, bukan cuma teknis. Dari spreadsheet kacau jadi aplikasi produksi real-time dalam 8 minggu. Tim produksi sekarang bisa fokus kerja, bukan ngurus file."</p>
+          <article class="testimonial-card fade-up">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"AppSheet Indonesia mengubah cara kerja pabrik kami. Dari manual tracking ke dashboard real-time dalam 3 bulan. Tim mereka sangat profesional dan paham bisnis manufaktur."</p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">BS</div>
               <div>
                 <div class="testimonial-name">Budi Santoso</div>
-                <div class="testimonial-role">VP Operations, PT Maju Jaya Manufacturing</div>
+                <div class="testimonial-role">Plant Director, PT Maju Jaya</div>
               </div>
             </div>
           </article>
 
-          <article class="card testimonial-card fade-up delay-1">
-            <div class="testimonial-stars" aria-label="5 bintang">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="testimonial-text">"Kurir kami dulu catat manual di kertas. Sekarang scan barcode, foto bukti kirim, otomatis masuk sistem + notif WA ke customer. Error delivery turun 90%."</p>
+          <article class="testimonial-card fade-up delay-1">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Sistem logistik kami sekarang terintegrasi end-to-end. Customer bisa tracking sendiri, tim ops fokus pada eksekusi, bukan admin. ROI tercapai di bulan ke-4."</p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">RW</div>
               <div>
-                <div class="testimonial-name">Rudi Wijaya</div>
-                <div class="testimonial-role">COO, JNE Express Regional Jakarta</div>
+                <div class="testimonial-name">Rina Wijaya</div>
+                <div class="testimonial-role">COO, Logindo Express</div>
               </div>
             </div>
           </article>
 
-          <article class="card testimonial-card fade-up delay-2">
-            <div class="testimonial-stars" aria-label="5 bintang">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="testimonial-text">"Payroll yang dulu 3 hari kerja, sekarang 30 menit. Slip gaji digital, perhitungan BPJS/PPh21 otomatis, audit trail lengkap. HR team kami nangis senang pertama kali jalanin."</p>
+          <article class="testimonial-card fade-up delay-2">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"HRIS & Payroll compliant Kemenaker, BPJS, PPh21 otomatis. Tim HR kami hemat 20 jam/minggu. Support pasca-go-live sangat responsif."</p>
             <div class="testimonial-author">
-              <div class="testimonial-avatar">SM</div>
+              <div class="testimonial-avatar">AH</div>
               <div>
-                <div class="testimonial-name">Siti Maryam</div>
-                <div class="testimonial-role">HR Director, PT Sinar Abadi Group</div>
+                <div class="testimonial-name">Andi Hermawan</div>
+                <div class="testimonial-role">HR Director, Group Ritel Nusantara</div>
               </div>
             </div>
           </article>
@@ -689,151 +642,58 @@
     </section>
 
     <!-- About / CTA -->
-    <section id="about" class="section" style="background: var(--color-bg-alt);" aria-labelledby="about-title">
+    <section id="about" class="section" aria-labelledby="about-title">
       <div class="container">
-        <div class="grid grid-2" style="align-items: center; gap: var(--space-16);">
-          <div>
-            <span class="section-tag">Tentang Kami</span>
-            <h2 id="about-title">AppSheet Indonesia: Mitra Transformasi Digital Anda</h2>
-            <p style="margin-bottom: var(--space-6);">Kami adalah tim certified AppSheet developers & Google Cloud partners yang fokus membangun solusi no-code/low-code untuk enterprise Indonesia. Berpengalaman 5+ tahun, 150+ aplikasi, 40+ klien dari startup hingga BUMN.</p>
-            <p style="margin-bottom: var(--space-6);">Berbeda dengan agency umum: kami tidak hanya 'ngoding'. Kami mendesain arsitektur data yang scalable, mengajarkan tim internal Anda (knowledge transfer), dan menjamin aplikasi bisa di-maintain tanpa vendor lock-in.</p>
-            <div class="flex gap-4 flex-wrap">
-              <a href="#contact" class="btn btn-primary">Mulai Diskusi Proyek</a>
-              <a href="#" class="btn btn-secondary">Unduh Company Profile</a>
-            </div>
+        <div class="section-header">
+          <span class="section-tag">Tentang Kami</span>
+          <h2 id="about-title" class="section-title">Mengapa <span style="color: var(--color-primary);">AppSheet Indonesia</span>?</h2>
+          <p class="section-desc">Kami bukan sekadar developer — kami mitra strategis transformasi digital Anda.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="fade-up">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); display: flex; align-items: center; justify-content: center; color: white; margin-bottom: var(--space-4);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+            <h3 style="margin-bottom: var(--space-3);">Khusus AppSheet</h3>
+            <p style="color: var(--color-text-muted); line-height: 1.7;">Fokus 100% pada ekosistem Google AppSheet. Paham mendalam limit & kelebihan platform untuk solusi optimal.</p>
           </div>
-          <div class="card" style="background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-card-bg) 100%); border-color: var(--color-accent);">
-            <div style="padding: var(--space-6);">
-              <h3 style="margin-bottom: var(--space-6); color: var(--color-accent);">Mengapa AppSheet Indonesia?</h3>
-              <ul style="display: grid; gap: var(--space-4); list-style: none;">
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Certified AppSheet Developer & Google Cloud Partner</span>
-                </li>
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Full-stack: AppSheet + Apps Script + BigQuery + Looker</span>
-                </li>
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Knowledge transfer wajib — tim Anda jadi mandiri</span>
-                </li>
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Support pasca-go-live 3 bulan (SLA response < 4 jam)</span>
-                </li>
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Harga transparan: fixed price per modul, no hidden cost</span>
-                </li>
-                <li class="flex gap-3">
-                  <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent); color: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✓</span>
-                  <span>Pengalaman industri: Manufaktur, Logistik, Ritel, Keuangan, HR</span>
-                </li>
-              </ul>
-            </div>
+          <div class="fade-up delay-1">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); display: flex; align-items: center; justify-content: center; color: white; margin-bottom: var(--space-4);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+            <h3 style="margin-bottom: var(--space-3);">Enterprise Grade</h3>
+            <p style="color: var(--color-text-muted); line-height: 1.7;">Standar keamanan, compliance, skalabilitas, dan governance untuk kebutuhan perusahaan besar.</p>
+          </div>
+          <div class="fade-up delay-2">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); display: flex; align-items: center; justify-content: center; color: white; margin-bottom: var(--space-4);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+            <h3 style="margin-bottom: var(--space-3);">Partnership Jangka Panjang</h3>
+            <p style="color: var(--color-text-muted); line-height: 1.7;">Support berkelanjutan: maintenance, optimization, training, dan scaling seiring bisnis Anda berkembang.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact / CTA -->
-    <section id="contact" class="cta-section" aria-labelledby="contact-title">
+    <!-- CTA Section -->
+    <section class="cta-section" aria-labelledby="cta-title">
       <div class="container">
-        <span class="section-tag" style="color: rgba(255,255,255,0.6);">Mulai Proyek</span>
-        <h2 id="contact-title">Siap Mengotomatisasi Bisnis Anda?</h2>
-        <p>Ceritakan tantangan Anda — kami akan balas dalam 24 jam dengan estimasi timeline, biaya, & arsitektur solusi awal. Gratis konsultasi 30 menit.</p>
-        <div class="flex justify-center gap-4 flex-wrap">
-          <a href="https://wa.me/6281234567890?text=Halo%20AppSheet%20Indonesia%2C%20saya%20ingin%20konsultasi%20tentang%20proyek%20AppSheet" class="btn btn-primary" style="background: #25D366; border-color: #25D366;" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
-            Chat via WhatsApp
-          </a>
-          <a href="mailto:hello@appsheetindonesia.com" class="btn btn-secondary" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.2H4c-1.1 0-2-.9-2-2V6c0-1.1.
-</path></svg>
-            Kirim Email
-          </a>
+        <h2 id="cta-title">Siap Memulai Transformasi Digital?</h2>
+        <p>Jadwalkan konsultasi gratis 30 menit. Kami akan menganalisis kebutuhan Anda dan memberikan rekomendasi solusi + estimasi timeline & budget.</p>
+        <div class="cta-actions">
+          <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="btn btn-secondary">Chat WhatsApp</a>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Contact -->
+    <section id="contact" class="section" style="background: var(--color-bg-alt);" aria-labelledby="contact-title">
       <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <a href="#" class="logo" aria-label="AppSheet Indonesia Home">
-              <span class="logo-mark">AI</span>
-              AppSheet Indonesia
-            </a>
-            <p>Mitra pengembangan AppSheet profesional untuk otomatisasi bisnis. Dari spreadsheet ke aplikasi skala produksi.</p>
-            <div class="footer-social">
-              <a href="https://wa.me/6281234567890" aria-label="WhatsApp" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg></a>
-              <a href="https://linkedin.com/company/appsheet-indonesia" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
-              <a href="https://github.com/appsheet-indonesia" aria-label="GitHub" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a>
-            </div>
-          </div>
-          <nav>
-            <h3 class="footer-title">Navigasi</h3>
-            <div class="footer-links">
-              <a href="#projects">Portfolio</a>
-              <a href="#services">Layanan</a>
-              <a href="#about">Tentang</a>
-              <a href="#contact">Kontak</a>
-            </div>
-          </nav>
-          <nav>
-            <h3 class="footer-title">Layanan</h3>
-            <div class="footer-links">
-              <a href="#">Discovery & Arsitektur</a>
-              <a href="#">Development Custom</a>
-              <a href="#">Migrasi Legacy</a>
-              <a href="#">Pelatihan & Workshop</a>
-            </div>
-          </nav>
-          <nav>
-            <h3 class="footer-title">Perusahaan</h3>
-            <div class="footer-links">
-              <a href="#">Blog & Insight</a>
-              <a href="#">Karir</a>
-              <a href="#">Kemitraan</a>
-              <a href="#">Kebijakan Privasi</a>
-            </div>
-          </nav>
+        <div class="section-header">
+          <span class="section-tag">Hubungi Kami</span>
+          <h2 id="contact-title" class="section-title">Mari <span style="color: var(--color-primary);">Bicarakan Proyek Anda</span></h2>
+          <p class="section-desc">Isi form di bawah atau hubungi langsung via WhatsApp/Email. Tim kami akan merespons dalam 1 jam kerja.</p>
         </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 AppSheet Indonesia. Dibangun dengan <span style="color: #ef4444;">♥</span> untuk ekosistem Google Workspace.</p>
-          <p style="font-size: 12px;">AppSheet Indonesia adalah mitra independen — bukan afiliasi resmi Google LLC.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Mobile Menu Script -->
-  <script>
-    (function() {
-      const btn = document.getElementById('mobileMenuBtn');
-      const nav = document.getElementById('nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function() {
-        const open = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open);
-      });
-      // Close on link click
-      nav.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          nav.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        });
-      });
-      // Close on escape
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && nav.classList.contains('open')) {
-          nav.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    })();
-  </script>
-</body>
-</html>
+        <div class="grid grid-2" style="gap: var(--space-12); max-width: 900px; margin: 0 auto;">
+          <div class="fade-up">
+            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: var(--space-6);">Informasi Kontak</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--space-5);">
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); transition: all var(--transition-fast);" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--color-primary)'" onmouseout="this.style.borderColor='var(--color-border)'; this.style.color='var(--color-text)'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.86
